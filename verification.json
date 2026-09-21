@@ -1,0 +1,45 @@
+{
+  "stage1_supplement": {
+    "style_scan": [],
+    "latex_diagnostics": [],
+    "pdf_sha256": "b8b833bf5c9ff6cae1c7787b5cf67a8864828f7ec64d62f2dd6718db14f818e0"
+  },
+  "source_check": {
+    "source_records": 24,
+    "mismatches": []
+  },
+  "baseline_results": {
+    "checked": 462,
+    "mismatches": []
+  },
+  "no_new_simulations": true,
+  "visual_inspection": {
+    "manuscript_pages": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "supplement_pages": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "log_pages": [
+      6,
+      132,
+      133,
+      134
+    ]
+  }
+}
