@@ -1,0 +1,60 @@
+{
+ "registered": "2026-09-21, after P2 and before any time-domain run of an equivalent",
+ "context": "context_p2.json of the frozen input set",
+ "k_per_scenario": {
+  "S1": [
+   4,
+   2
+  ],
+  "S2": [
+   8,
+   6
+  ],
+  "S3": [
+   4,
+   2
+  ]
+ },
+ "k_basis": "frequency-domain results of P2 only: the smallest K at which the response-feature equivalent stays within 5 percent at the build and the test input, and one smaller K. No time-domain error was known.",
+ "models": "per scenario: F, the K = 12 equivalent with one chain per hall, and the parameter-feature and the response-feature equivalent at each registered K, fixed membership; at K = 2 both feature sets give one grouping",
+ "inputs": "the build and the test input of every scenario; same input file, allocation, window and output instants for every model",
+ "solver": {
+  "production": "Rodas, KLU, rtol 1e-4, atol 1e-6, hmax 0.01 s, output every 0.0025 s, tol_ic 1e-6 (--tol paper)",
+  "strict": "rtol 1e-8, atol 1e-10 (--tol main): per scenario F and the response-feature equivalent of the main K, build input; the strict run of F is the P1 screen run of the same model and input",
+  "rerun_rule": "a reported difference below 0.1 percent is rerun at rtol 1e-6"
+ },
+ "errors": {
+  "interval": "1 s to 61 s, the input window",
+  "deviation": "every model minus its OWN initial value",
+  "per_output": [
+   "b0 = yE(0) - yF(0)",
+   "rms_abs = RMS of the difference of the deviations",
+   "rms_rel = rms_abs / RMS of the deviation of F; not applicable below 1e-6 of the output base",
+   "e_max = largest absolute difference",
+   "e_max_rel = e_max / largest absolute deviation of F"
+  ],
+  "outputs": [
+   "P_MW",
+   "Q_Mvar",
+   "V_pu",
+   "f_Hz"
+  ],
+  "separate": "time-domain errors, band errors and single-frequency gain errors are reported separately and never replace one another"
+ },
+ "representative_chain": "the chain of F with the largest DC-link excursion under the input, and the chain of the equivalent whose group contains the hall of that chain; shown to connect excitation and response, no statement on every internal state",
+ "offpeak": "offpeak_control.json of P2; the models of its scenario; gain and phase from a fit over the last 20 s; the sinusoid is a controlled test signal, not a task model",
+ "figure": {
+  "case": "S2, build input: the scenario with the largest frequency-domain error in P2",
+  "zoom": "[t* - 0.5 s, t* + 1.5 s] of the window, t* the transition with the largest absolute jump of the site terminal demand; fixed from the input alone, the same for every model"
+ },
+ "timing": {
+  "inputs": [
+   "S1_phase_build",
+   "S2_phase_build",
+   "S3_phase_build"
+  ],
+  "protocol": "one process per input, alone on the server, 2 BLAS and Numba threads; every model built once and warmed up once; three timed rounds, model order rotated by one per round; median and range; the timed sink keeps the PCC active power only; build time listed separately",
+  "note": "at the production setting the step is bounded by the 0.01 s input knots for every model, so a time ratio reflects the cost per step; it is not derived from the state count"
+ },
+ "never": "no K, model, input, window or error definition is changed after a time-domain error has been seen"
+}

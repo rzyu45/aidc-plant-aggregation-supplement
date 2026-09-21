@@ -1,0 +1,728 @@
+{
+ "S1_phase_build": {
+  "coherent_share": 1.0,
+  "allocation_columns_sum_to_one": true,
+  "slots_within_capacity": true,
+  "same_slots_allocation_base_as_v1": false,
+  "same_busy_slots_per_hall_and_base_as_v1": true,
+  "job_share": 0.125,
+  "site_equals_base_plus_tasks": 2.842170943040401e-14,
+  "node_power_within_rating": true,
+  "node_power_above_idle": true,
+  "node_power_max_w": {
+   "train": 2973.9627411048173,
+   "infer": 2862.1788371691646
+  },
+  "node_power_vs_measured_max": {
+   "train": 1.0
+  },
+  "hall_loading_max": 0.6411900255041386,
+  "within_terminal_budget": true,
+  "mean_shift_from_v1_mw": {
+   "site": 1.3555791191188575,
+   "hall_max_abs": 0.14776568634722942
+  },
+  "hall_task_part_is_allocated_task_power": 0.0,
+  "tables_reproduce_sampled_series": 0.0,
+  "mean_jump_at_transitions_mw": [
+   2.6013178705987974
+  ],
+  "segments_reproduce_sampled_series": 0.0,
+  "node_bounds": {
+   "on": true,
+   "time_share_at_upper_bound": {
+    "train": 0.29561739710048324,
+    "infer": 0.0
+   },
+   "time_share_at_lower_bound": {
+    "train": 0.0,
+    "infer": 0.0
+   }
+  },
+  "spectrum_site": {
+   "variance_mw2": 1.546973814307486,
+   "nyquist_hz": 50.0,
+   "shares": {
+    "below 0.1 Hz": 0.015529972713191153,
+    "0.1 to 3 Hz": 0.8087371891765486,
+    "3 to 20 Hz": 0.14640981090394392,
+    "above 20 Hz": 0.029323027206316313
+   }
+  },
+  "spectrum_site_phase_levels_only": {
+   "variance_mw2": 1.5466742327493463,
+   "nyquist_hz": 50.0,
+   "shares": {
+    "below 0.1 Hz": 0.015776841698330064,
+    "0.1 to 3 Hz": 0.8148277146484018,
+    "3 to 20 Hz": 0.14566096141276463,
+    "above 20 Hz": 0.023734482240503674
+   }
+  },
+  "spectrum_site_intra_phase_deviation_only": {
+   "variance_mw2": 0.01979903300017392,
+   "nyquist_hz": 50.0,
+   "shares": {
+    "below 0.1 Hz": 0.0036962775806764522,
+    "0.1 to 3 Hz": 0.05525327594752609,
+    "3 to 20 Hz": 0.3495794725745778,
+    "above 20 Hz": 0.5914709738972197
+   }
+  },
+  "spectrum_site_v1_counterpart": {
+   "variance_mw2": 148.69272102751404,
+   "nyquist_hz": 5.0,
+   "shares": {
+    "below 0.1 Hz": 0.3148415210675462,
+    "0.1 to 3 Hz": 0.6850858702575314,
+    "3 to 20 Hz": 7.260867492250786e-05,
+    "above 20 Hz": 0.0
+   }
+  },
+  "dc_link_linear": {
+   "full": {
+    "linear_response_of": "S1_build__F",
+    "max_abs": 0.11433855439417971,
+    "chain": 0,
+    "rms_of_that_chain": 0.032401177564410244,
+    "p99_abs_of_that_chain": 0.09677164132756944
+   },
+   "phase_levels_only": {
+    "linear_response_of": "S1_build__F",
+    "max_abs": 0.11263089474723917,
+    "chain": 2,
+    "rms_of_that_chain": 0.032567988620818174,
+    "p99_abs_of_that_chain": 0.09697054339982893
+   },
+   "intra_phase_deviation_only": {
+    "linear_response_of": "S1_build__F",
+    "max_abs": 0.010912473423333843,
+    "chain": 0,
+    "rms_of_that_chain": 0.002455033088115589,
+    "p99_abs_of_that_chain": 0.0069221216248099016
+   },
+   "v1_counterpart": {
+    "linear_response_of": "S1_build__F",
+    "max_abs": 0.13200113812968353,
+    "chain": 1,
+    "rms_of_that_chain": 0.042444220051292794,
+    "p99_abs_of_that_chain": 0.1286224329936274
+   }
+  }
+ },
+ "S1_phase_test": {
+  "coherent_share": 1.0,
+  "allocation_columns_sum_to_one": true,
+  "slots_within_capacity": true,
+  "same_slots_allocation_base_as_v1": false,
+  "same_busy_slots_per_hall_and_base_as_v1": true,
+  "job_share": 0.125,
+  "site_equals_base_plus_tasks": 2.842170943040401e-14,
+  "node_power_within_rating": true,
+  "node_power_above_idle": true,
+  "node_power_max_w": {
+   "train": 2970.42412570145,
+   "infer": 2778.7971693919485
+  },
+  "node_power_vs_measured_max": {
+   "train": 1.0
+  },
+  "hall_loading_max": 0.624951117508723,
+  "within_terminal_budget": true,
+  "mean_shift_from_v1_mw": {
+   "site": 16.58218175201118,
+   "hall_max_abs": 1.807080404705233
+  },
+  "hall_task_part_is_allocated_task_power": 0.0,
+  "tables_reproduce_sampled_series": 0.0,
+  "mean_jump_at_transitions_mw": [
+   2.591046172598107
+  ],
+  "segments_reproduce_sampled_series": 0.0,
+  "node_bounds": {
+   "on": true,
+   "time_share_at_upper_bound": {
+    "train": 0.37393767705382436,
+    "infer": 0.0
+   },
+   "time_share_at_lower_bound": {
+    "train": 0.0,
+    "infer": 0.0
+   }
+  },
+  "spectrum_site": {
+   "variance_mw2": 1.5448718419163345,
+   "nyquist_hz": 50.0,
+   "shares": {
+    "below 0.1 Hz": 0.014691666552981783,
+    "0.1 to 3 Hz": 0.8611929491175573,
+    "3 to 20 Hz": 0.09603030017244758,
+    "above 20 Hz": 0.028085084157013565
+   }
+  },
+  "spectrum_site_phase_levels_only": {
+   "variance_mw2": 1.5363672705850389,
+   "nyquist_hz": 50.0,
+   "shares": {
+    "below 0.1 Hz": 0.01618187465944166,
+    "0.1 to 3 Hz": 0.8804563063020292,
+    "3 to 20 Hz": 0.0899872585547148,
+    "above 20 Hz": 0.013374560483814591
+   }
+  },
+  "spectrum_site_intra_phase_deviation_only": {
+   "variance_mw2": 0.042392901894121,
+   "nyquist_hz": 50.0,
+   "shares": {
+    "below 0.1 Hz": 0.009456585544791203,
+    "0.1 to 3 Hz": 0.07572274313247943,
+    "3 to 20 Hz": 0.3226727645180447,
+    "above 20 Hz": 0.5921479068046845
+   }
+  },
+  "spectrum_site_v1_counterpart": {
+   "variance_mw2": 633.5673041022163,
+   "nyquist_hz": 5.0,
+   "shares": {
+    "below 0.1 Hz": 0.8875895666981469,
+    "0.1 to 3 Hz": 0.11239865451861696,
+    "3 to 20 Hz": 1.1778783235979163e-05,
+    "above 20 Hz": 0.0
+   }
+  },
+  "dc_link_linear": {
+   "full": {
+    "linear_response_of": "S1_build__F",
+    "max_abs": 0.11459318889740434,
+    "chain": 1,
+    "rms_of_that_chain": 0.02422060819878757,
+    "p99_abs_of_that_chain": 0.09234397750599378
+   },
+   "phase_levels_only": {
+    "linear_response_of": "S1_build__F",
+    "max_abs": 0.11418795483196927,
+    "chain": 1,
+    "rms_of_that_chain": 0.024282603807759963,
+    "p99_abs_of_that_chain": 0.09386952635834923
+   },
+   "intra_phase_deviation_only": {
+    "linear_response_of": "S1_build__F",
+    "max_abs": 0.019086842012682518,
+    "chain": 1,
+    "rms_of_that_chain": 0.0035986034796532972,
+    "p99_abs_of_that_chain": 0.010866129891649763
+   },
+   "v1_counterpart": {
+    "linear_response_of": "S1_build__F",
+    "max_abs": 0.17969507186007042,
+    "chain": 0,
+    "rms_of_that_chain": 0.05325284847903529,
+    "p99_abs_of_that_chain": 0.16888078548686425
+   }
+  }
+ },
+ "S2_phase_build": {
+  "coherent_share": 1.0,
+  "allocation_columns_sum_to_one": true,
+  "slots_within_capacity": true,
+  "same_slots_allocation_base_as_v1": false,
+  "same_busy_slots_per_hall_and_base_as_v1": true,
+  "job_share": 0.125,
+  "site_equals_base_plus_tasks": 2.842170943040401e-14,
+  "node_power_within_rating": true,
+  "node_power_above_idle": true,
+  "node_power_max_w": {
+   "job1": 2978.8643275324803,
+   "job2": 2970.14764154379,
+   "job3": 2973.092100352118,
+   "job4": 2989.203396261518,
+   "job5": 2975.812715547003,
+   "job6": 2967.4821849756986,
+   "infer": 2862.1788371691646
+  },
+  "node_power_vs_measured_max": {
+   "job1": 1.0,
+   "job2": 1.0,
+   "job3": 1.0,
+   "job4": 1.0,
+   "job5": 1.0,
+   "job6": 1.0
+  },
+  "hall_loading_max": 0.6413252275964351,
+  "within_terminal_budget": true,
+  "mean_shift_from_v1_mw": {
+   "site": 9.44348053276056,
+   "hall_max_abs": 1.7226646348690302
+  },
+  "hall_task_part_is_allocated_task_power": 0.0,
+  "tables_reproduce_sampled_series": 0.0,
+  "mean_jump_at_transitions_mw": [
+   0.507463096246856,
+   0.4027377117001406,
+   0.41548144175509044,
+   0.4699915191354124,
+   0.37696295367518884,
+   0.35212657822114707
+  ],
+  "segments_reproduce_sampled_series": 0.0,
+  "node_bounds": {
+   "on": true,
+   "time_share_at_upper_bound": {
+    "job1": 0.30578236960506583,
+    "job2": 0.28395267455424095,
+    "job3": 0.32794534244292617,
+    "job4": 0.31178136977170473,
+    "job5": 0.2759540076653891,
+    "job6": 0.2521246458923513,
+    "infer": 0.0
+   },
+   "time_share_at_lower_bound": {
+    "job1": 0.0,
+    "job2": 0.0,
+    "job3": 0.0,
+    "job4": 0.0,
+    "job5": 0.0,
+    "job6": 0.0,
+    "infer": 0.0
+   }
+  },
+  "spectrum_site": {
+   "variance_mw2": 0.26917925258075137,
+   "nyquist_hz": 50.0,
+   "shares": {
+    "below 0.1 Hz": 0.006778040853263245,
+    "0.1 to 3 Hz": 0.8352186977868832,
+    "3 to 20 Hz": 0.12557232304240623,
+    "above 20 Hz": 0.03243093831744742
+   }
+  },
+  "spectrum_site_phase_levels_only": {
+   "variance_mw2": 0.2716128890774993,
+   "nyquist_hz": 50.0,
+   "shares": {
+    "below 0.1 Hz": 0.007099966195123437,
+    "0.1 to 3 Hz": 0.8564382709109265,
+    "3 to 20 Hz": 0.11702204796531494,
+    "above 20 Hz": 0.019439714928635096
+   }
+  },
+  "spectrum_site_intra_phase_deviation_only": {
+   "variance_mw2": 0.005999257287413016,
+   "nyquist_hz": 50.0,
+   "shares": {
+    "below 0.1 Hz": 0.0017200333996194687,
+    "0.1 to 3 Hz": 0.08704059565166179,
+    "3 to 20 Hz": 0.3578333585686462,
+    "above 20 Hz": 0.5534060123800726
+   }
+  },
+  "spectrum_site_v1_counterpart": {
+   "variance_mw2": 129.24233821785475,
+   "nyquist_hz": 5.0,
+   "shares": {
+    "below 0.1 Hz": 0.9237788294258235,
+    "0.1 to 3 Hz": 0.07621254867460928,
+    "3 to 20 Hz": 8.621899567111825e-06,
+    "above 20 Hz": 0.0
+   }
+  },
+  "dc_link_linear": {
+   "full": {
+    "linear_response_of": "S2_build__F",
+    "max_abs": 0.11081399390351786,
+    "chain": 1,
+    "rms_of_that_chain": 0.029913672108463792,
+    "p99_abs_of_that_chain": 0.09258060822174408
+   },
+   "phase_levels_only": {
+    "linear_response_of": "S2_build__F",
+    "max_abs": 0.11095142679087946,
+    "chain": 0,
+    "rms_of_that_chain": 0.030126360860059962,
+    "p99_abs_of_that_chain": 0.09290292162943467
+   },
+   "intra_phase_deviation_only": {
+    "linear_response_of": "S2_build__F",
+    "max_abs": 0.013946171795122888,
+    "chain": 32,
+    "rms_of_that_chain": 0.0022771771725885914,
+    "p99_abs_of_that_chain": 0.006709071985613474
+   },
+   "v1_counterpart": {
+    "linear_response_of": "S2_build__F",
+    "max_abs": 0.12672762138228716,
+    "chain": 0,
+    "rms_of_that_chain": 0.044765669620098564,
+    "p99_abs_of_that_chain": 0.12420614107698236
+   }
+  }
+ },
+ "S2_phase_test": {
+  "coherent_share": 1.0,
+  "allocation_columns_sum_to_one": true,
+  "slots_within_capacity": true,
+  "same_slots_allocation_base_as_v1": false,
+  "same_busy_slots_per_hall_and_base_as_v1": true,
+  "job_share": 0.125,
+  "site_equals_base_plus_tasks": 2.842170943040401e-14,
+  "node_power_within_rating": true,
+  "node_power_above_idle": true,
+  "node_power_max_w": {
+   "job1": 2991.223423452683,
+   "job2": 2980.3884443720035,
+   "job3": 2974.3888377452085,
+   "job4": 2980.551373980865,
+   "job5": 2978.956172673918,
+   "job6": 2977.2294659612594,
+   "infer": 2778.7971693919485
+  },
+  "node_power_vs_measured_max": {
+   "job1": 1.0,
+   "job2": 0.9999999999999999,
+   "job3": 1.0,
+   "job4": 1.0,
+   "job5": 1.0,
+   "job6": 1.0
+  },
+  "hall_loading_max": 0.6255248314716945,
+  "within_terminal_budget": true,
+  "mean_shift_from_v1_mw": {
+   "site": -0.5534402894995054,
+   "hall_max_abs": 0.1310291859473267
+  },
+  "hall_task_part_is_allocated_task_power": 0.0,
+  "tables_reproduce_sampled_series": 0.0,
+  "mean_jump_at_transitions_mw": [
+   0.48448749285548337,
+   0.39803845707851526,
+   0.40347844319407256,
+   0.46155628518866815,
+   0.3860573276826722,
+   0.3562986627045583
+  ],
+  "segments_reproduce_sampled_series": 0.0,
+  "node_bounds": {
+   "on": true,
+   "time_share_at_upper_bound": {
+    "job1": 0.268788535244126,
+    "job2": 0.32577903682719545,
+    "job3": 0.3191134810864856,
+    "job4": 0.3519413431094818,
+    "job5": 0.3176137310448259,
+    "job6": 0.3184469255124146,
+    "infer": 0.0
+   },
+   "time_share_at_lower_bound": {
+    "job1": 0.0,
+    "job2": 0.0,
+    "job3": 0.0,
+    "job4": 0.0,
+    "job5": 0.0,
+    "job6": 0.0,
+    "infer": 0.0
+   }
+  },
+  "spectrum_site": {
+   "variance_mw2": 0.2388169203651348,
+   "nyquist_hz": 50.0,
+   "shares": {
+    "below 0.1 Hz": 0.01242087909852174,
+    "0.1 to 3 Hz": 0.7806123764150815,
+    "3 to 20 Hz": 0.16320036595704157,
+    "above 20 Hz": 0.0437663785293551
+   }
+  },
+  "spectrum_site_phase_levels_only": {
+   "variance_mw2": 0.23878301837203111,
+   "nyquist_hz": 50.0,
+   "shares": {
+    "below 0.1 Hz": 0.011265015823430135,
+    "0.1 to 3 Hz": 0.8075991174107221,
+    "3 to 20 Hz": 0.15635269422014283,
+    "above 20 Hz": 0.024783172545704647
+   }
+  },
+  "spectrum_site_intra_phase_deviation_only": {
+   "variance_mw2": 0.007275660121804456,
+   "nyquist_hz": 50.0,
+   "shares": {
+    "below 0.1 Hz": 0.0018237910077595666,
+    "0.1 to 3 Hz": 0.07844741508939625,
+    "3 to 20 Hz": 0.33002578887699696,
+    "above 20 Hz": 0.5897030050258472
+   }
+  },
+  "spectrum_site_v1_counterpart": {
+   "variance_mw2": 34.861124908583776,
+   "nyquist_hz": 5.0,
+   "shares": {
+    "below 0.1 Hz": 0.17479012615882558,
+    "0.1 to 3 Hz": 0.8251184371118385,
+    "3 to 20 Hz": 9.143672933572999e-05,
+    "above 20 Hz": 0.0
+   }
+  },
+  "dc_link_linear": {
+   "full": {
+    "linear_response_of": "S2_build__F",
+    "max_abs": 0.1084198008203159,
+    "chain": 31,
+    "rms_of_that_chain": 0.02487636183264571,
+    "p99_abs_of_that_chain": 0.0860037730966299
+   },
+   "phase_levels_only": {
+    "linear_response_of": "S2_build__F",
+    "max_abs": 0.10765072855838081,
+    "chain": 31,
+    "rms_of_that_chain": 0.025108974723509474,
+    "p99_abs_of_that_chain": 0.0866254368017279
+   },
+   "intra_phase_deviation_only": {
+    "linear_response_of": "S2_build__F",
+    "max_abs": 0.015616319913269443,
+    "chain": 29,
+    "rms_of_that_chain": 0.0032071402572556654,
+    "p99_abs_of_that_chain": 0.009640012791650953
+   },
+   "v1_counterpart": {
+    "linear_response_of": "S2_build__F",
+    "max_abs": 0.13114609829209153,
+    "chain": 0,
+    "rms_of_that_chain": 0.04053532052392263,
+    "p99_abs_of_that_chain": 0.12540030681394665
+   }
+  }
+ },
+ "S3_phase_build": {
+  "coherent_share": 1.0,
+  "allocation_columns_sum_to_one": true,
+  "slots_within_capacity": true,
+  "same_slots_allocation_base_as_v1": false,
+  "same_busy_slots_per_hall_and_base_as_v1": true,
+  "job_share": 0.125,
+  "site_equals_base_plus_tasks": 2.842170943040401e-14,
+  "node_power_within_rating": true,
+  "node_power_above_idle": true,
+  "node_power_max_w": {
+   "train": 2968.312560398791,
+   "tune": 3016.0615461820616,
+   "infer": 2862.1788371691646
+  },
+  "node_power_vs_measured_max": {
+   "train": 1.0,
+   "tune": 1.0
+  },
+  "hall_loading_max": 0.6407130586303758,
+  "within_terminal_budget": true,
+  "mean_shift_from_v1_mw": {
+   "site": 3.594991880691154,
+   "hall_max_abs": 0.6260100579150274
+  },
+  "hall_task_part_is_allocated_task_power": 0.0,
+  "tables_reproduce_sampled_series": 0.0,
+  "mean_jump_at_transitions_mw": [
+   0.8382495853924,
+   2.3916974110028035
+  ],
+  "segments_reproduce_sampled_series": 0.0,
+  "node_bounds": {
+   "on": true,
+   "time_share_at_upper_bound": {
+    "train": 0.31594734210964837,
+    "tune": 0.3699383436093984,
+    "infer": 0.0
+   },
+   "time_share_at_lower_bound": {
+    "train": 0.0,
+    "tune": 0.00449925012497917,
+    "infer": 0.0
+   }
+  },
+  "spectrum_site": {
+   "variance_mw2": 1.14125822440065,
+   "nyquist_hz": 50.0,
+   "shares": {
+    "below 0.1 Hz": 0.005737682457042877,
+    "0.1 to 3 Hz": 0.9089259655537697,
+    "3 to 20 Hz": 0.0705257462479122,
+    "above 20 Hz": 0.014810605741275549
+   }
+  },
+  "spectrum_site_phase_levels_only": {
+   "variance_mw2": 1.1518263627194176,
+   "nyquist_hz": 50.0,
+   "shares": {
+    "below 0.1 Hz": 0.006048822249631122,
+    "0.1 to 3 Hz": 0.9154469888696625,
+    "3 to 20 Hz": 0.06756533860207374,
+    "above 20 Hz": 0.010938850278632839
+   }
+  },
+  "spectrum_site_intra_phase_deviation_only": {
+   "variance_mw2": 0.0075720181477796165,
+   "nyquist_hz": 50.0,
+   "shares": {
+    "below 0.1 Hz": 0.002465760049226095,
+    "0.1 to 3 Hz": 0.08276527363049246,
+    "3 to 20 Hz": 0.34740660188089345,
+    "above 20 Hz": 0.5673623644393878
+   }
+  },
+  "spectrum_site_v1_counterpart": {
+   "variance_mw2": 54.17854059407181,
+   "nyquist_hz": 5.0,
+   "shares": {
+    "below 0.1 Hz": 0.37768597876718624,
+    "0.1 to 3 Hz": 0.6220985191010815,
+    "3 to 20 Hz": 0.0002155021317325209,
+    "above 20 Hz": 0.0
+   }
+  },
+  "dc_link_linear": {
+   "full": {
+    "linear_response_of": "S3_build__F",
+    "max_abs": 0.11973179584351178,
+    "chain": 0,
+    "rms_of_that_chain": 0.018037867909655912,
+    "p99_abs_of_that_chain": 0.05685887119082459
+   },
+   "phase_levels_only": {
+    "linear_response_of": "S3_build__F",
+    "max_abs": 0.11956591707708314,
+    "chain": 0,
+    "rms_of_that_chain": 0.01806180256078205,
+    "p99_abs_of_that_chain": 0.056137964151626245
+   },
+   "intra_phase_deviation_only": {
+    "linear_response_of": "S3_build__F",
+    "max_abs": 0.014504309130823078,
+    "chain": 0,
+    "rms_of_that_chain": 0.0022971904494871152,
+    "p99_abs_of_that_chain": 0.007145704979404359
+   },
+   "v1_counterpart": {
+    "linear_response_of": "S3_build__F",
+    "max_abs": 0.12632483070061426,
+    "chain": 1,
+    "rms_of_that_chain": 0.029657384038670572,
+    "p99_abs_of_that_chain": 0.1177782335346294
+   }
+  }
+ },
+ "S3_phase_test": {
+  "coherent_share": 1.0,
+  "allocation_columns_sum_to_one": true,
+  "slots_within_capacity": true,
+  "same_slots_allocation_base_as_v1": false,
+  "same_busy_slots_per_hall_and_base_as_v1": true,
+  "job_share": 0.125,
+  "site_equals_base_plus_tasks": 2.842170943040401e-14,
+  "node_power_within_rating": true,
+  "node_power_above_idle": true,
+  "node_power_max_w": {
+   "train": 2969.5730487777573,
+   "tune": 3013.717738766347,
+   "infer": 2778.7971693919485
+  },
+  "node_power_vs_measured_max": {
+   "train": 1.0,
+   "tune": 1.0
+  },
+  "hall_loading_max": 0.6241211704285597,
+  "within_terminal_budget": true,
+  "mean_shift_from_v1_mw": {
+   "site": 14.246349771246699,
+   "hall_max_abs": 1.8925710317226727
+  },
+  "hall_task_part_is_allocated_task_power": 0.0,
+  "tables_reproduce_sampled_series": 0.0,
+  "mean_jump_at_transitions_mw": [
+   0.8279605278654987,
+   2.382154191137332
+  ],
+  "segments_reproduce_sampled_series": 0.0,
+  "node_bounds": {
+   "on": true,
+   "time_share_at_upper_bound": {
+    "train": 0.3594400933177804,
+    "tune": 0.42209631728045327,
+    "infer": 0.0
+   },
+   "time_share_at_lower_bound": {
+    "train": 0.0,
+    "tune": 0.0004999166805532411,
+    "infer": 0.0
+   }
+  },
+  "spectrum_site": {
+   "variance_mw2": 1.0855021256057507,
+   "nyquist_hz": 50.0,
+   "shares": {
+    "below 0.1 Hz": 0.027265930531310115,
+    "0.1 to 3 Hz": 0.8786299951060449,
+    "3 to 20 Hz": 0.07761831518540041,
+    "above 20 Hz": 0.01648575917724453
+   }
+  },
+  "spectrum_site_phase_levels_only": {
+   "variance_mw2": 1.0912774118489683,
+   "nyquist_hz": 50.0,
+   "shares": {
+    "below 0.1 Hz": 0.02862334579856069,
+    "0.1 to 3 Hz": 0.8830094760781861,
+    "3 to 20 Hz": 0.07628322049845104,
+    "above 20 Hz": 0.012083957624802195
+   }
+  },
+  "spectrum_site_intra_phase_deviation_only": {
+   "variance_mw2": 0.007585664232401396,
+   "nyquist_hz": 50.0,
+   "shares": {
+    "below 0.1 Hz": 0.006549922697478814,
+    "0.1 to 3 Hz": 0.07836223139474949,
+    "3 to 20 Hz": 0.31140252338465746,
+    "above 20 Hz": 0.6036853225231142
+   }
+  },
+  "spectrum_site_v1_counterpart": {
+   "variance_mw2": 155.23666519662896,
+   "nyquist_hz": 5.0,
+   "shares": {
+    "below 0.1 Hz": 0.9497302574228217,
+    "0.1 to 3 Hz": 0.050259123656969974,
+    "3 to 20 Hz": 1.0618920208677973e-05,
+    "above 20 Hz": 0.0
+   }
+  },
+  "dc_link_linear": {
+   "full": {
+    "linear_response_of": "S3_build__F",
+    "max_abs": 0.1023434328470859,
+    "chain": 4,
+    "rms_of_that_chain": 0.018764019704907927,
+    "p99_abs_of_that_chain": 0.09054952531839111
+   },
+   "phase_levels_only": {
+    "linear_response_of": "S3_build__F",
+    "max_abs": 0.10297954700691363,
+    "chain": 6,
+    "rms_of_that_chain": 0.01875961870840351,
+    "p99_abs_of_that_chain": 0.09055743195350173
+   },
+   "intra_phase_deviation_only": {
+    "linear_response_of": "S3_build__F",
+    "max_abs": 0.01377776933882248,
+    "chain": 0,
+    "rms_of_that_chain": 0.002702000036207602,
+    "p99_abs_of_that_chain": 0.008048048630782881
+   },
+   "v1_counterpart": {
+    "linear_response_of": "S3_build__F",
+    "max_abs": 0.12892660275618106,
+    "chain": 1,
+    "rms_of_that_chain": 0.03866664061111205,
+    "p99_abs_of_that_chain": 0.1221840038405578
+   }
+  }
+ }
+}
