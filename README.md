@@ -1,6 +1,6 @@
 # Supplementary material
 
-Companion to **Task-Oriented Dynamic Modeling and Aggregation of AI Data Center Plants**.
+Companion to **Task-Oriented Modeling and Aggregation of AI Data Center Plants for Resonance Analysis**.
 
 The manuscript is maintained in the separate private repository [aidc-plant-aggregation-paper](https://github.com/rzyu45/aidc-plant-aggregation-paper). This repository contains the supplement source and PDF, the complete 21-state supply-chain equations, electrical and workload parameters, aggregation and error definitions, complete saved comparison tables, and figures that show limitations of the equivalents.
 

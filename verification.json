@@ -2,7 +2,7 @@
   "stage1_supplement": {
     "style_scan": [],
     "latex_diagnostics": [],
-    "pdf_sha256": "b8b833bf5c9ff6cae1c7787b5cf67a8864828f7ec64d62f2dd6718db14f818e0"
+    "pdf_sha256": "c7cc2d103ba94f35ac9cef6e9589c680293186c9e8670dda4cd338041b682136"
   },
   "source_check": {
     "source_records": 24,
@@ -41,5 +41,30 @@
       133,
       134
     ]
+  },
+  "purpose_revision": {
+    "title": "Task-Oriented Modeling and Aggregation of AI Data Center Plants for Resonance Analysis",
+    "purpose": "task-to-PCC resonance response",
+    "methods": "small-signal modal/frequency-response analysis and task-driven time-domain validation",
+    "abstract_words": null,
+    "page_count": 12,
+    "unchanged_rendered_pages": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "visually_checked_pages": [
+      1
+    ],
+    "latex_diagnostics": [],
+    "new_simulations": false
   }
 }
