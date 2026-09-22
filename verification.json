@@ -2,7 +2,7 @@
   "stage1_supplement": {
     "style_scan": [],
     "latex_diagnostics": [],
-    "pdf_sha256": "d958e936ff3369af1f4f97b59e18964b011e7f30b94c900aaca538765a277259"
+    "pdf_sha256": "184e08e40470dc87e4756dba8be31345b1d0d1e344be3c134336d83ba5dd958a"
   },
   "source_check": {
     "source_records": 24,
@@ -91,5 +91,12 @@
     "latex_diagnostics": [],
     "new_model_work": false,
     "saved_response_audit": "report/stage1_coupling_audit/saved_response_check.json"
+  },
+  "sentence_source_format": {
+    "one_sentence_per_source_line": true,
+    "paragraph_breaks_preserved": true,
+    "math_and_table_rows_preserved": true,
+    "page_count": 13,
+    "all_pages_pixel_identical_at_dpi": 144
   }
 }

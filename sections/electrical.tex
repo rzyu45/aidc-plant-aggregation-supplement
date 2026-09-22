@@ -1,19 +1,35 @@
 \clearpage
 \section{Electrical Model and Power Accounting}
 \subsection{Conventions and state variables}
-A reproducible plant equivalent requires consistent device bases and connection signs. A chain contains an active front end (AFE), a voltage source inverter (VSI), a power supply unit (PSU) and a downstream DC--DC stage. Each supply chain uses its own three-phase rating $S_n$ as the power base. The network uses $S_b=200$~MVA and $\omega_b=2\pi60$~rad/s. Time is in seconds. Per-unit inductances and capacitances multiply derivatives divided by $\omega_b$. Controller integrators retain the unscaled time derivatives used in the source equations. The reference speed is $\omega_s=1$.
+A reproducible plant equivalent requires consistent device bases and connection signs.
+A chain contains an active front end (AFE), a voltage source inverter (VSI), a power supply unit (PSU) and a downstream DC--DC stage.
+Each supply chain uses its own three-phase rating $S_n$ as the power base.
+The network uses $S_b=200$~MVA and $\omega_b=2\pi60$~rad/s.
+Time is in seconds.
+Per-unit inductances and capacitances multiply derivatives divided by $\omega_b$.
+Controller integrators retain the unscaled time derivatives used in the source equations.
+The reference speed is $\omega_s=1$.
 
-The local AFE frame rotates by the phase-locked loop (PLL) angle $\theta$. Define
+The local AFE frame rotates by the phase-locked loop (PLL) angle $\theta$.
+Define
 \begin{equation}
 \R(\theta)=\begin{bmatrix}\cos\theta&\sin\theta\\-\sin\theta&\cos\theta\end{bmatrix},\qquad
 \J=\begin{bmatrix}0&-1\\1&0\end{bmatrix}.
 \end{equation}
-Here $\bm v_g$ is the voltage at the low-voltage terminal of the unit transformer in network coordinates. The rectifier current $\bm i_a$ is positive into the supply chain. The VSI uses a separate synchronous frame with voltage $\bm v_v$ and converter current $\bm i_c$.
+Here $\bm v_g$ is the voltage at the low-voltage terminal of the unit transformer in network coordinates.
+The rectifier current $\bm i_a$ is positive into the supply chain.
+The VSI uses a separate synchronous frame with voltage $\bm v_v$ and converter current $\bm i_c$.
 
-One chain has 21 differential states. The AFE contributes $\theta$, $\epsilon$, $\bar v_q$, the two entries of $\bm i_a$, $\xi_a$ and the two entries of $\bm\gamma_a$. The VSI contributes the two entries of each of $\bm i_c$, $\bm v_v$, $\bm\xi_v$ and $\bm\gamma_v$. The remaining states are the shared DC-link voltage $v_d$, the PSU voltage $v_p$ and integrator $\xi_p$, and the server-side voltage $v_e$ and integrator $\xi_e$. The following vector equations count each two-entry vector as two states.
+One chain has 21 differential states.
+The AFE contributes $\theta$, $\epsilon$, $\bar v_q$, the two entries of $\bm i_a$, $\xi_a$ and the two entries of $\bm\gamma_a$.
+The VSI contributes the two entries of each of $\bm i_c$, $\bm v_v$, $\bm\xi_v$ and $\bm\gamma_v$.
+The remaining states are the shared DC-link voltage $v_d$, the PSU voltage $v_p$ and integrator $\xi_p$, and the server-side voltage $v_e$ and integrator $\xi_e$.
+The following vector equations count each two-entry vector as two states.
 
 \subsection{AFE rectifier}
-The rectifier synchronizes to the unit-transformer voltage and regulates the shared DC link. Let $\bm v_a=\R(\theta)\bm v_g$. Its equations are
+The rectifier synchronizes to the unit-transformer voltage and regulates the shared DC link.
+Let $\bm v_a=\R(\theta)\bm v_g$.
+Its equations are
 \begin{align}
 \dot\theta&=\omega_b(\omega_{\rm pll}-\omega_s), & \dot\epsilon&=\bar v_q,\\
 \dot{\bar v}_q&=\omega_{\rm lp}(v_{a,q}-\bar v_q), &
@@ -23,10 +39,14 @@ The rectifier synchronizes to the unit-transformer voltage and regulates the sha
 \bm i_a^\star&=\begin{bmatrix}k_{p,da}(v_d^\star-v_d)+k_{i,da}\xi_a\\0\end{bmatrix},\\
 \bm m_a&=\frac{k_{p,ca}(\bm i_a-\bm i_a^\star)+k_{i,ca}\bm\gamma_a+\omega_{\rm pll}\ell_a\J\bm i_a}{v_d}.
 \end{align}
-A superscript $\star$ denotes a reference value. The constants $r_a$ and $\ell_a$ are the AFE filter resistance and inductance. Subscripts $da$ and $ca$ identify the DC-voltage and current controllers. The current-controller error and the coupling signs follow the source model \cite{zhao2026dynamic}; replacing them by another rectifier convention changes the model.
+A superscript $\star$ denotes a reference value.
+The constants $r_a$ and $\ell_a$ are the AFE filter resistance and inductance.
+Subscripts $da$ and $ca$ identify the DC-voltage and current controllers.
+The current-controller error and the coupling signs follow the source model \cite{zhao2026dynamic}; replacing them by another rectifier convention changes the model.
 
 \subsection{VSI and shared DC link}
-The VSI regulates its output voltage while drawing energy from the rectifier DC link. With reference $\bm v_v^\star=[v_u^\star,0]^{\mathsf T}$, its equations are
+The VSI regulates its output voltage while drawing energy from the rectifier DC link.
+With reference $\bm v_v^\star=[v_u^\star,0]^{\mathsf T}$, its equations are
 \begin{align}
 \frac{\ell_v}{\omega_b}\dot{\bm i}_c&=v_d\bm m_v-\bm v_v-r_v\bm i_c+\omega_s\ell_v\J\bm i_c,\label{eq:vsi-current}\\
 \frac{c_v}{\omega_b}\dot{\bm v}_v&=\bm i_c-\bm i_o+\omega_s c_v\J\bm v_v,\\
@@ -35,37 +55,68 @@ The VSI regulates its output voltage while drawing energy from the rectifier DC 
 \bm m_v&=\frac{k_{p,cv}(\bm i_c^\star-\bm i_c)+k_{i,cv}\bm\gamma_v-\omega_s\ell_v\J\bm i_c}{v_d},\label{eq:vsi-modulation}\\
 \frac{c_d}{\omega_b}\dot v_d&=\bm m_a^{\mathsf T}\bm i_a-\bm m_v^{\mathsf T}\bm i_c.
 \end{align}
-Here $r_v$, $\ell_v$ and $c_v$ are the VSI filter parameters, $c_d$ is the DC-link capacitance, and $\bm i_o$ is the current drawn by the PSU array. Subscripts $vv$ and $cv$ denote its voltage and current controllers. The DC-link equation couples both converters through their current balance. The study represents online double-conversion operation. Battery discharge, bypass switching and protection actions are outside this model.
+Here $r_v$, $\ell_v$ and $c_v$ are the VSI filter parameters, $c_d$ is the DC-link capacitance, and $\bm i_o$ is the current drawn by the PSU array.
+Subscripts $vv$ and $cv$ denote its voltage and current controllers.
+The DC-link equation couples both converters through their current balance.
+The study represents online double-conversion operation.
+Battery discharge, bypass switching and protection actions are outside this model.
 
 \subsection{PSU array and server DC--DC stage}
-The positive-sequence PSU equivalent converts its AC input into a common DC supply. Let $g_p$ be its controlled input conductance and $i_p$ its DC output current. Then
+The positive-sequence PSU equivalent converts its AC input into a common DC supply.
+Let $g_p$ be its controlled input conductance and $i_p$ its DC output current.
+Then
 \begin{align}
 \frac{c_p}{\omega_b}\dot v_p&=\frac{(g_p-r_p g_p^2)\bm v_v^{\mathsf T}\bm v_v}{3v_p}-i_p, &
 \dot\xi_p&=v_p^\star-v_p,\\
 g_p&=k_{p,vp}(v_p^\star-v_p)+k_{i,vp}\xi_p, & \bm i_o&=g_p\bm v_v.
 \end{align}
-The parameters $r_p$ and $c_p$ represent the PSU equivalent resistance and capacitance. The downstream DC--DC stage has a fast current loop represented by its commanded current $i_e$, with
+The parameters $r_p$ and $c_p$ represent the PSU equivalent resistance and capacitance.
+The downstream DC--DC stage has a fast current loop represented by its commanded current $i_e$, with
 \begin{align}
 \frac{c_e}{\omega_b}\dot v_e&=i_e-g_e v_e, & \dot\xi_e&=v_e^\star-v_e,\\
 g_e&=\frac{p_{\rm load}}{3(v_e^\star)^2}, &
 i_e&=k_{p,ve}(v_e^\star-v_e)+k_{i,ve}\xi_e, &
 i_p&=\frac{v_e}{v_p}i_e.
 \end{align}
-The factor 3 follows the source model's three-phase power convention. The input $p_{\rm load}$ is the prescribed server demand on the chain base at $v_e=v_e^\star$. The instantaneous power of the modeled load is $3g_e v_e^2$, so it equals $p_{\rm load}$ at the voltage reference. This distinction matters when interpreting internal voltage excursions. The node-power waveform specifies the terminal-demand command; it is not an additional current injection at the PCC.
+The factor 3 follows the source model's three-phase power convention.
+The input $p_{\rm load}$ is the prescribed server demand on the chain base at $v_e=v_e^\star$.
+The instantaneous power of the modeled load is $3g_e v_e^2$, so it equals $p_{\rm load}$ at the voltage reference.
+This distinction matters when interpreting internal voltage excursions.
+The node-power waveform specifies the terminal-demand command; it is not an additional current injection at the PCC.
 
 \subsection{Hall and network connections}
-Each hall has one common feeder and four parallel supply branches. Each branch has its own 3~MVA unit transformer and independent converter output. The four branches share one quarter of the hall demand command and have identical parameters within a hall. The cooling load connects to the hall bus after the common feeder and before the unit transformers. Auxiliary loads connect to the two medium-voltage buses. The buses and both main transformers remain distinct in every equivalent.
+Each hall has one common feeder and four parallel supply branches.
+Each branch has its own 3~MVA unit transformer and independent converter output.
+The four branches share one quarter of the hall demand command and have identical parameters within a hall.
+The cooling load connects to the hall bus after the common feeder and before the unit transformers.
+Auxiliary loads connect to the two medium-voltage buses.
+The buses and both main transformers remain distinct in every equivalent.
 
 The current drawn from the network by chain $n$ is
 \begin{equation}
 \bm i_{n,\rm sys}=\frac{S_n}{S_b}\R(\theta_n)^{\mathsf T}\bm i_{a,n}.
 \end{equation}
-With the network voltage phasors $V$, generator injections $I_G$ and explicit load withdrawals $I_L$, nodal balance is $YV=I_G-I_L$. A load represented as an admittance is included in $Y$ and is excluded from $I_L$. The algebraic network retains line and transformer impedances and feeder charging. It omits their electromagnetic differential states.
+With the network voltage phasors $V$, generator injections $I_G$ and explicit load withdrawals $I_L$, nodal balance is $YV=I_G-I_L$.
+A load represented as an admittance is included in $Y$ and is excluded from $I_L$.
+The algebraic network retains line and transformer impedances and feeder charging.
+It omits their electromagnetic differential states.
 
-For the full plant, the operating-point cooling power is 17\% of the hall's AC IT input. Total auxiliary power is 3\% of the plant's AC IT input, divided equally between the medium-voltage sections. Cooling uses a constant-power representation and the auxiliaries use constant impedance. The static demand at bus~8 is
+For the full plant, the operating-point cooling power is 17\% of the hall's AC IT input.
+Total auxiliary power is 3\% of the plant's AC IT input, divided equally between the medium-voltage sections.
+Cooling uses a constant-power representation and the auxiliaries use constant impedance.
+The static demand at bus~8 is
 \begin{equation}
 P_{8,\rm residual}=100-1.20\sum_n P_{n,\rm AC}\quad\mathrm{MW}.
 \end{equation}
-The original 35~Mvar remains as a static impedance load. Collector losses are accounted for by the network. The PCC power is the sum of the powers entering both main transformers, so it includes these losses. The full plant's static loads are retained in its equivalents. They are not adjusted to cancel an equivalent's loss error.
+The original 35~Mvar remains as a static impedance load.
+Collector losses are accounted for by the network.
+The PCC power is the sum of the powers entering both main transformers, so it includes these losses.
+The full plant's static loads are retained in its equivalents.
+They are not adjusted to cancel an equivalent's loss error.
 
-The external system has a fourth-order synchronous machine with excitation and turbine-governor dynamics at bus~1, a droop grid-forming converter at bus~2 and a phase-locked-loop grid-following converter at bus~3. Their equations and parameter conventions follow the modified nine-bus reference in the supplement of \cite{zhao2026dynamic}. The implementation uses the source-current feed-forward sign $-1$ and the q-axis voltage convention for the grid-following converter. The accompanying data files give all grid parameter values and network branches. These grid devices contribute 37 states, so the plant model has $37+21K$ states after aggregation. The full plant has $K=48$ and 1045 states.
+The external system has a fourth-order synchronous machine with excitation and turbine-governor dynamics at bus~1, a droop grid-forming converter at bus~2 and a phase-locked-loop grid-following converter at bus~3.
+Their equations and parameter conventions follow the modified nine-bus reference in the supplement of \cite{zhao2026dynamic}.
+The implementation uses the source-current feed-forward sign $-1$ and the q-axis voltage convention for the grid-following converter.
+The accompanying data files give all grid parameter values and network branches.
+These grid devices contribute 37 states, so the plant model has $37+21K$ states after aggregation.
+The full plant has $K=48$ and 1045 states.

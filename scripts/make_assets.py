@@ -14,7 +14,8 @@ def tables():
         v=h['values'];rows.append(' & '.join([str(h['hall']+1)]+[f'{v[k]:.2f}' for k in ('fbw_pll','fbw_dc','fbw_v_vsi','fbw_v_psu','feeder_km','tx_z_pct')])+r' \\')
     body=r'''\begin{table}[H]
 \centering\small
-\caption{Hall Design Summary. Frequencies in Hz, Feeder Length in km, Transformer Impedance in Percent.}
+\caption{Hall Design Summary.
+Frequencies in Hz, Feeder Length in km, Transformer Impedance in Percent.}
 \label{tab:hall-design}
 \begin{tabular}{rrrrrrr}\toprule
 Hall & PLL & AFE voltage & VSI voltage & PSU voltage & Feeder & Transformer\\\midrule

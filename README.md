@@ -36,3 +36,7 @@ These commands read saved results. They do not build an electrical model or run 
 The selected arrays retain the saved trajectories without time shifts, smoothing or resampling. The original source papers and raw NLR archives are not included. Dataset DOI is [10.7799/3025227](https://doi.org/10.7799/3025227). This package supports document and figure reproduction; it is not a standalone distribution of the Solverz/SolPSDyn simulation environment.
 
 Section S3.4 explains the local 12-state supply-chain subsystem and the remaining AFE/DC-link/grid coupling. The saved aggregation comparisons do not isolate inter-unit network coupling as the cause of the dominant resonances or errors.
+
+## TeX source convention
+
+Write one prose sentence per source line, including captions and contribution items. Preserve blank lines between paragraphs. Keep equations, table rows and drawing commands in their logical LaTeX structure. Markdown paragraphs remain on one source line.

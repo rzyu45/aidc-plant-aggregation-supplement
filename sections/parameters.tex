@@ -1,6 +1,9 @@
 \section{Electrical Parameters and Workload Inputs}
 \subsection{Device design}
-Independent parameter draws describe differences between halls while preserving identical chains inside each hall. A PCG64 generator uses seed 20260919. The draw order is section, hall, the nine passive elements, seven controller bandwidths, the PLL filter frequency, feeder length and unit-transformer impedance. The numerical ranges are study assumptions, rather than a measured distribution of data-center equipment.
+Independent parameter draws describe differences between halls while preserving identical chains inside each hall.
+A PCG64 generator uses seed 20260919.
+The draw order is section, hall, the nine passive elements, seven controller bandwidths, the PLL filter frequency, feeder length and unit-transformer impedance.
+The numerical ranges are study assumptions, rather than a measured distribution of data-center equipment.
 
 \begin{table}[H]
 \centering
@@ -19,7 +22,10 @@ PSU capacitance & $c_p$ & 2.0 & 1.8 to 2.2\\
 Server-side capacitance & $c_e$ & 0.2 & 0.18 to 0.22\\\bottomrule
 \end{tabular}
 \end{table}
-All entries are per unit on the chain base. The voltage references are $v_d^\star=v_u^\star=v_p^\star=1$ and $v_e^\star=0.5$. Nominal values originate from \cite{zhao2026dynamic}. The VSI voltage-loop bandwidth is 80~Hz in this study, whereas the source Table I uses 100~Hz.
+All entries are per unit on the chain base.
+The voltage references are $v_d^\star=v_u^\star=v_p^\star=1$ and $v_e^\star=0.5$.
+Nominal values originate from \cite{zhao2026dynamic}.
+The VSI voltage-loop bandwidth is 80~Hz in this study, whereas the source Table I uses 100~Hz.
 
 \begin{table}[H]
 \centering
@@ -36,32 +42,92 @@ PSU voltage & 10 & 8 to 12 & 1\\
 Server voltage & 100 & 80 to 120 & 1\\\bottomrule
 \end{tabular}
 \end{table}
-The PLL low-pass frequency is uniform from 80 to 120~Hz. Gains follow the bandwidth rule in \cite{zhao2026dynamic}. With $\omega_n=2\pi f_{\rm bw}$, the voltage loop has $k_p=2\zeta\omega_n C/\omega_b$ and $k_i=\omega_n^2 C/\omega_b$. The current loop has $k_p=2\zeta\omega_n L/\omega_b-R$ and $k_i=\omega_n^2 L/\omega_b$. The PLL uses $k_p=2\zeta\omega_n/\omega_b$ and $k_i=\omega_n^2/\omega_b$. Gains are derived from each draw and are not independent random parameters.
+The PLL low-pass frequency is uniform from 80 to 120~Hz.
+Gains follow the bandwidth rule in \cite{zhao2026dynamic}.
+With $\omega_n=2\pi f_{\rm bw}$, the voltage loop has $k_p=2\zeta\omega_n C/\omega_b$ and $k_i=\omega_n^2 C/\omega_b$.
+The current loop has $k_p=2\zeta\omega_n L/\omega_b-R$ and $k_i=\omega_n^2 L/\omega_b$.
+The PLL uses $k_p=2\zeta\omega_n/\omega_b$ and $k_i=\omega_n^2/\omega_b$.
+Gains are derived from each draw and are not independent random parameters.
 
-Exact values for all 12 halls, including every derived gain, are in \path{data/design.json}. Table~\ref{tab:hall-design} gives the controller and connection parameters that identify the hall differences. The data file retains full precision.
+Exact values for all 12 halls, including every derived gain, are in \path{data/design.json}.
+Table~\ref{tab:hall-design} gives the controller and connection parameters that identify the hall differences.
+The data file retains full precision.
 \input{tables/hall_design}
 
 \subsection{Network data}
-The main transformers are each 100~MVA with 8.5\% impedance and assumed $X/R=35$. Unit transformers are 3~MVA with a uniformly drawn impedance of 5\% to 6\% and assumed $X/R=6$. Their ratings are compatible with the repeated power-block representation discussed in \cite{ross2025emt}; the complete topology is a study configuration.
+The main transformers are each 100~MVA with 8.5\% impedance and assumed $X/R=35$.
+Unit transformers are 3~MVA with a uniformly drawn impedance of 5\% to 6\% and assumed $X/R=6$.
+Their ratings are compatible with the repeated power-block representation discussed in \cite{ross2025emt}; the complete topology is a study configuration.
 
-Each 34.5~kV feeder has a drawn length from 0.2 to 1.5~km. Its series impedance is $0.046+\ii0.043$~$\Omega$ per 1000~ft, with capacitive reactance coefficient $0.042$~M$\Omega\cdot1000$~ft. These values come from Southwire SPEC 80214, revision 1.000.021, for a 35~kV, 500~kcmil aluminium cable. The admittance uses the line length and both charging halves. Transformer and feeder impedances are converted to the system base before forming $Y$.
+Each 34.5~kV feeder has a drawn length from 0.2 to 1.5~km.
+Its series impedance is $0.046+\ii0.043$~$\Omega$ per 1000~ft, with capacitive reactance coefficient $0.042$~M$\Omega\cdot1000$~ft.
+These values come from Southwire SPEC 80214, revision 1.000.021, for a 35~kV, 500~kcmil aluminium cable.
+The admittance uses the line length and both charging halves.
+Transformer and feeder impedances are converted to the system base before forming $Y$.
 
-The three external buses with loads have 125~MW and 50~Mvar at bus~5, 90~MW and 30~Mvar at bus~6, and the 100~MW and 35~Mvar budget at bus~8. Bus~1 is the slack source. The active-power schedules at buses~2 and~3 are 163 and 85~MW. Voltage set points are 1.04, 1.025 and 1.025~p.u. at buses~1 to~3. The branch table in \path{data/grid_parameters.json} retains its 100~MVA source base and the explicit conversion to 200~MVA.
+The three external buses with loads have 125~MW and 50~Mvar at bus~5, 90~MW and 30~Mvar at bus~6, and the 100~MW and 35~Mvar budget at bus~8.
+Bus~1 is the slack source.
+The active-power schedules at buses~2 and~3 are 163 and 85~MW.
+Voltage set points are 1.04, 1.025 and 1.025~p.u. at buses~1 to~3.
+The branch table in \path{data/grid_parameters.json} retains its 100~MVA source base and the explicit conversion to 200~MVA.
 
 \subsection{Power measurements and constructed task timing}
-Power levels and timing have separate sources. The NLR measurements sum graphics processing unit (GPU) board power and central processing unit (CPU) package power on nodes with four H100 GPUs and two AMD EPYC 9554 processors \cite{vercellino2026measurement}. They exclude memory, network cards, fans, storage and power-supply losses. The training label denotes Stable Diffusion, fine-tuning denotes Llama-2 70B LoRA, and online inference denotes Llama-3.1 70B serving. The training and fine-tuning records use 0.2~s polling and serving uses 0.1~s polling. These intervals do not establish sensor bandwidth.
+Power levels and timing have separate sources.
+The NLR measurements sum graphics processing unit (GPU) board power and central processing unit (CPU) package power on nodes with four H100 GPUs and two AMD EPYC 9554 processors \cite{vercellino2026measurement}.
+They exclude memory, network cards, fans, storage and power-supply losses.
+The training label denotes Stable Diffusion, fine-tuning denotes Llama-2 70B LoRA, and online inference denotes Llama-3.1 70B serving.
+The training and fine-tuning records use 0.2~s polling and serving uses 0.1~s polling.
+These intervals do not establish sensor bandwidth.
 
-The phase model supplies the fast timing. The base frequency is drawn once per task from 0.5 to 1.5~Hz for training or 0.3 to 0.7~Hz for fine-tuning. Each iteration has duration $[f_j(1+\xi_i)]^{-1}$ with a zero-mean normal $\xi_i$ of standard deviation 0.1. Compute shares are uniform from 0.55 to 0.80 for training and 0.70 to 0.90 for fine-tuning. Compute-phase level offsets have standard deviations 0.05 and 0.03, respectively. Communication-phase drops have means 0.3 and 0.8 with the same respective standard deviations. These are the experimental settings of \cite{ko2026oscillations}, not universal workload limits.
+The phase model supplies the fast timing.
+The base frequency is drawn once per task from 0.5 to 1.5~Hz for training or 0.3 to 0.7~Hz for fine-tuning.
+Each iteration has duration $[f_j(1+\xi_i)]^{-1}$ with a zero-mean normal $\xi_i$ of standard deviation 0.1.
+Compute shares are uniform from 0.55 to 0.80 for training and 0.70 to 0.90 for fine-tuning.
+Compute-phase level offsets have standard deviations 0.05 and 0.03, respectively.
+Communication-phase drops have means 0.3 and 0.8 with the same respective standard deviations.
+These are the experimental settings of \cite{ko2026oscillations}, not universal workload limits.
 
-Within-phase standard deviations are drawn once per task. Training uses 0.02 to 0.05 in computation and 0.01 to 0.03 in communication. Fine-tuning uses 0.01 to 0.03 and 0.005 to 0.02. Independent standard normal samples are generated before integration on a 0.01~s grid. Linear interpolation between these samples fixes the temporal dependence for every solver evaluation. This interpolation is a study assumption. It does not turn the NLR records into measured fast task cycles.
+Within-phase standard deviations are drawn once per task.
+Training uses 0.02 to 0.05 in computation and 0.01 to 0.03 in communication.
+Fine-tuning uses 0.01 to 0.03 and 0.005 to 0.02.
+Independent standard normal samples are generated before integration on a 0.01~s grid.
+Linear interpolation between these samples fixes the temporal dependence for every solver evaluation.
+This interpolation is a study assumption.
+It does not turn the NLR records into measured fast task cycles.
 
-The compute power is the median above the midpoint of the fifth and ninety-fifth percentiles of the selected measured window. Each node's constructed power is restricted at all input knots to the interval between 418.2~W and the maximum of that measured window. Phase boundaries retain distinct left and right values. Linear interpolation is applied only inside each phase. All nodes assigned to one job use the same realization. Independent jobs use different seeded realizations.
+The compute power is the median above the midpoint of the fifth and ninety-fifth percentiles of the selected measured window.
+Each node's constructed power is restricted at all input knots to the interval between 418.2~W and the maximum of that measured window.
+Phase boundaries retain distinct left and right values.
+Linear interpolation is applied only inside each phase.
+All nodes assigned to one job use the same realization.
+Independent jobs use different seeded realizations.
 
-Online inference uses a saturating fit of power against request rate from the two measured serving sweeps. Its request rate remains constant in each simulation window. Separate requests across replicas do not supply evidence for a common high-frequency inference fluctuation. The exact fit and its source intervals are retained in \path{data/inference_map.json}.
+Online inference uses a saturating fit of power against request rate from the two measured serving sweeps.
+Its request rate remains constant in each simulation window.
+Separate requests across replicas do not supply evidence for a common high-frequency inference fluctuation.
+The exact fit and its source intervals are retained in \path{data/inference_map.json}.
 
 \subsection{Job sizes, allocation and independent inputs}
-Every hall has 2800 node slots. The baseline occupancy is drawn uniformly from 0.55 to 0.95 using seed components 20260919 and 1. One eighth of the baseline training or fine-tuning slots are retained for synchronous jobs, rounded down within each hall. Released slots serve online inference. Idle slots retain the measured idle-node power. This construction preserves the occupied resource count without adding the GPU or CPU power a second time.
+Every hall has 2800 node slots.
+The baseline occupancy is drawn uniformly from 0.55 to 0.95 using seed components 20260919 and 1.
+One eighth of the baseline training or fine-tuning slots are retained for synchronous jobs, rounded down within each hall.
+Released slots serve online inference.
+Idle slots retain the measured idle-node power.
+This construction preserves the occupied resource count without adding the GPU or CPU power a second time.
 
-The synchronous job size follows a registered screen of the full model. The candidate sequence is 1, 0.5, 0.25 and 0.125 of the baseline job slots. The selected value is 0.125. Selection uses the full plant's response and converter reference levels before equivalent-model errors are evaluated. It does not establish a maximum safe job size for a physical facility. The supply-chain model contains no active device current, modulation or protection limits.
+The synchronous job size follows a registered screen of the full model.
+The candidate sequence is 1, 0.5, 0.25 and 0.125 of the baseline job slots.
+The selected value is 0.125.
+Selection uses the full plant's response and converter reference levels before equivalent-model errors are evaluated.
+It does not establish a maximum safe job size for a physical facility.
+The supply-chain model contains no active device current, modulation or protection limits.
 
-S1 has one training job across all halls. S2 has six independently generated training jobs, one per hall pair. S3 combines training and fine-tuning with hall-specific resource shares. Every scenario also contains online serving. Each task is scaled once by its total node count. Hall shares are $a_{hj}=m_{hj}/\sum_hm_{hj}$, so their sum is one. All inter-hall time offsets are zero. The grouping and test inputs use separate random draws and the corresponding source windows. The exact seeds, node counts, phase tables, source record identifiers and allocation matrices are stored in \path{data/scenarios.json}.
+S1 has one training job across all halls.
+S2 has six independently generated training jobs, one per hall pair.
+S3 combines training and fine-tuning with hall-specific resource shares.
+Every scenario also contains online serving.
+Each task is scaled once by its total node count.
+Hall shares are $a_{hj}=m_{hj}/\sum_hm_{hj}$, so their sum is one.
+All inter-hall time offsets are zero.
+The grouping and test inputs use separate random draws and the corresponding source windows.
+The exact seeds, node counts, phase tables, source record identifiers and allocation matrices are stored in \path{data/scenarios.json}.
