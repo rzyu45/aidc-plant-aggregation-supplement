@@ -28,11 +28,11 @@ A superscript $\star$ denotes a reference value. The constants $r_a$ and $\ell_a
 \subsection{VSI and shared DC link}
 The VSI regulates its output voltage while drawing energy from the rectifier DC link. With reference $\bm v_v^\star=[v_u^\star,0]^{\mathsf T}$, its equations are
 \begin{align}
-\frac{\ell_v}{\omega_b}\dot{\bm i}_c&=v_d\bm m_v-\bm v_v-r_v\bm i_c+\omega_s\ell_v\J\bm i_c,\\
+\frac{\ell_v}{\omega_b}\dot{\bm i}_c&=v_d\bm m_v-\bm v_v-r_v\bm i_c+\omega_s\ell_v\J\bm i_c,\label{eq:vsi-current}\\
 \frac{c_v}{\omega_b}\dot{\bm v}_v&=\bm i_c-\bm i_o+\omega_s c_v\J\bm v_v,\\
 \dot{\bm\xi}_v&=\bm v_v^\star-\bm v_v, & \dot{\bm\gamma}_v&=\bm i_c^\star-\bm i_c,\\
 \bm i_c^\star&=k_{p,vv}(\bm v_v^\star-\bm v_v)+k_{i,vv}\bm\xi_v-\omega_s c_v\J\bm v_v,\\
-\bm m_v&=\frac{k_{p,cv}(\bm i_c^\star-\bm i_c)+k_{i,cv}\bm\gamma_v-\omega_s\ell_v\J\bm i_c}{v_d},\\
+\bm m_v&=\frac{k_{p,cv}(\bm i_c^\star-\bm i_c)+k_{i,cv}\bm\gamma_v-\omega_s\ell_v\J\bm i_c}{v_d},\label{eq:vsi-modulation}\\
 \frac{c_d}{\omega_b}\dot v_d&=\bm m_a^{\mathsf T}\bm i_a-\bm m_v^{\mathsf T}\bm i_c.
 \end{align}
 Here $r_v$, $\ell_v$ and $c_v$ are the VSI filter parameters, $c_d$ is the DC-link capacitance, and $\bm i_o$ is the current drawn by the PSU array. Subscripts $vv$ and $cv$ denote its voltage and current controllers. The DC-link equation couples both converters through their current balance. The study represents online double-conversion operation. Battery discharge, bypass switching and protection actions are outside this model.

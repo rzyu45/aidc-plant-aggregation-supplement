@@ -2,7 +2,7 @@
   "stage1_supplement": {
     "style_scan": [],
     "latex_diagnostics": [],
-    "pdf_sha256": "c7cc2d103ba94f35ac9cef6e9589c680293186c9e8670dda4cd338041b682136"
+    "pdf_sha256": "d958e936ff3369af1f4f97b59e18964b011e7f30b94c900aaca538765a277259"
   },
   "source_check": {
     "source_records": 24,
@@ -65,6 +65,31 @@
       1
     ],
     "latex_diagnostics": [],
-    "new_simulations": false
+    "new_simulations": false,
+    "superseded_by": "coupling_review"
+  },
+  "coupling_review": {
+    "page_count": 13,
+    "abstract_words": null,
+    "unchanged_rendered_pages": [
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "visually_checked_pages": [
+      1,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13
+    ],
+    "latex_diagnostics": [],
+    "new_model_work": false,
+    "saved_response_audit": "report/stage1_coupling_audit/saved_response_check.json"
   }
 }
