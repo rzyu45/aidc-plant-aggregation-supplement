@@ -98,5 +98,39 @@
     "math_and_table_rows_preserved": true,
     "page_count": 13,
     "all_pages_pixel_identical_at_dpi": 144
+  },
+  "presubmission_revision": {
+    "date": "2026-09-28",
+    "matches_paper_commit": "2e29771 on branch revise-aggregation-draft of aidc-plant-aggregation-paper",
+    "terminology": "clustering input, clusters and number of clusters, as in the paper",
+    "added": [
+      "synchronous node shares 12.48 and 8.25 percent",
+      "band error over training and fine-tuning jobs with the effect of inference tasks",
+      "modal eigenvalue distances in both directions, Table S4",
+      "DC-link dynamic errors of every representative chain, Table S7",
+      "reference levels of the converter screen and the reason for the modulation ratio",
+      "timing ratios against the full model and the exact 12-cluster equivalent",
+      "Solverz citation and Rodas description"
+    ],
+    "page_count": 14,
+    "latex_diagnostics": [],
+    "visually_checked_pages": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14
+    ],
+    "new_simulations": false,
+    "pdf_sha256": "34ec5f6c31827c93cab1bd2d0e37f0e21f8626f4a022873829380b94a9539352"
   }
 }

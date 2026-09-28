@@ -112,6 +112,7 @@ Every hall has 2800 node slots.
 The baseline occupancy is drawn uniformly from 0.55 to 0.95 using seed components 20260919 and 1.
 One eighth of the baseline training or fine-tuning slots are retained for synchronous jobs, rounded down within each hall.
 Released slots serve online inference.
+The synchronous jobs therefore run on 3039 of the 24354 busy nodes in S1 and S2, 12.48\%, and on 2008 of the 24354 busy nodes in S3, 8.25\%, as recorded in \path{data/scenarios.json}.
 Idle slots retain the measured idle-node power.
 This construction preserves the occupied resource count without adding the GPU or CPU power a second time.
 
@@ -129,5 +130,5 @@ Every scenario also contains online serving.
 Each task is scaled once by its total node count.
 Hall shares are $a_{hj}=m_{hj}/\sum_hm_{hj}$, so their sum is one.
 All inter-hall time offsets are zero.
-The grouping and test inputs use separate random draws and the corresponding source windows.
+The clustering and test inputs use separate random draws and the corresponding source windows.
 The exact seeds, node counts, phase tables, source record identifiers and allocation matrices are stored in \path{data/scenarios.json}.

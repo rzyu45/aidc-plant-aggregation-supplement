@@ -1,12 +1,12 @@
 \section{Aggregation and Validation Definitions}
 \subsection{Feature construction}
-A consistent comparison requires both feature sets to use the same grouping inputs and equivalent construction.
+A consistent comparison requires both feature sets to use the same clustering inputs and equivalent construction.
 The 19 design features are the nine passive elements, seven bandwidths, PLL filter frequency, feeder length and unit-transformer impedance.
 Mean AC loading supplies the operating-point feature.
-Each feature is standardized by its common mean and standard deviation over all halls and the three grouping operating points.
+Each feature is standardized by its common mean and standard deviation over all halls and the operating points of the three clustering inputs.
 The fixed feature vector uses the 19 design features once and the three normalized loading values divided by $\sqrt{3}$.
 
-For response features, $G_{s,mh}(\ii\omega_k)$ is the full model's response from 1~MW at hall $h$ to output $m$, at grouping operating point $s$.
+For response features, $G_{s,mh}(\ii\omega_k)$ is the full model's response from 1~MW at hall $h$ to output $m$, at the operating point of the clustering input of scenario $s$.
 The four outputs are PCC active power, reactive power and voltage, and synchronous-machine frequency.
 The 601 logarithmic samples cover 0.1 to 20~Hz.
 Define $w_k=1/(2N_b)$ within band $b$, with the bands 0.1 to 3~Hz and greater than 3 to 20~Hz.
@@ -20,14 +20,14 @@ This retains relative gain and phase differences without allowing one output's u
 Test inputs do not enter these scales.
 
 K-means uses Lloyd's algorithm, 20 initializations and random seed 20260919.
-Each medium-voltage section forms $K/2$ groups.
+The plant has two medium-voltage sections of six halls each, and each section forms $K/2$ clusters.
 Cross-section merges are prohibited.
-Tested total group counts are 2, 4, 6, 8, 10 and 12.
+The tested numbers of clusters are 2, 4, 6, 8, 10 and 12.
 Fixed and per-scenario memberships coincide for this electrical design.
 The exact memberships and feature scales are in \path{data/groups.json}.
 
 \subsection{Physical equivalent}
-Let a group contain units with ratings $S_n$ and weights $w_n=S_n/\sum_n S_n$.
+Let a cluster contain units with ratings $S_n$ and weights $w_n=S_n/\sum_n S_n$.
 Its rating is $S_E=\sum_nS_n$ and its terminal demand is the sum of the member demands.
 A capacitance, PI gain or filter cut-off $a$ uses $a_E=\sum_nw_na_n$.
 A series resistance or inductance uses
@@ -68,19 +68,32 @@ For the modal scatter plot, marker area uses the largest contribution over all t
 The highlighted job's transfer curve is evaluated separately.
 This avoids interpreting the scatter as a job-specific mode filter.
 
-The main comparison uses the worst task's normalized complex response error in a band $\mathcal B$,
+The main comparison uses the normalized complex response error in a band $\mathcal B$ of the worst training or fine-tuning job $j$,
 \begin{equation}
 \epsilon_{\mathcal B}=\max_j\left[\frac{\sum_{k\in\mathcal B}|G_{E,j}(\ii\omega_k)-G_{F,j}(\ii\omega_k)|^2}{\sum_{k\in\mathcal B}|G_{F,j}(\ii\omega_k)|^2}\right]^{1/2}.
 \end{equation}
 The sums weight the saved logarithmic grid points equally.
-The worst task is selected separately for each output and model.
-The main 5\% criterion applies to PCC active power in the upper band at both grouping and test operating points.
+The worst job is selected separately for each output and model.
+Inference tasks are excluded, since their request rate and therefore their power are constant within each task window.
+Including them would change no band error by more than 0.1 percentage points, except for response features in S3 at four to eight clusters, which would rise by at most 0.72 percentage points.
+No smallest passing number of clusters would change.
+The main 5\% criterion applies to PCC active power in the upper band under both the clustering and the test inputs.
 It is a study criterion and does not certify the other outputs.
 Peak-gain and peak-frequency deviations use each model's refined peak.
 Phase difference uses the full model's peak grid frequency for both models.
 These distinct definitions explain why matching a peak gain can coexist with a large complex band error.
 
-\clearpage
+The modal comparison of the paper uses S2 with $K=6$ under the clustering input and the modes between 3 and 20~Hz whose contribution reaches 10\% of the largest contribution of the full model.
+An eigenvalue is rebuilt from the damped frequency $f$ and the damping ratio $\zeta$ as $\lambda=2\pi f(-\zeta+\ii\sqrt{1-\zeta^2})/\sqrt{1-\zeta^2}$.
+For every mode of an equivalent, the distance to the nearest mode of the full model is divided by the magnitude of that eigenvalue of the full model.
+This direction checks whether the modes of the equivalent lie at modes of the full model.
+The opposite direction takes, for every mode of the full model, the distance to the nearest mode of the equivalent, divided by its own magnitude, and weights the mean by its contribution.
+It checks whether the modes of the full model are represented.
+Table~\ref{tab:mode-distance} gives both.
+The modes of response features lie closer to modes of the full model, whereas both equivalents represent the modes of the full model with a weighted mean distance of about 3.2\%.
+Response features leave no mode near the two modes of the full model at 5.93~Hz.
+\input{tables/mode_distance}
+
 \subsection{Local supply-chain modes and network coupling}
 The origin of a resonant response must be distinguished from its transmission to the PCC.
 The supply-chain equations reproduced from \cite{zhao2026dynamic} use unlimited modulation, a fixed VSI reference frequency $\omega_s$ and prescribed terminal demand.
@@ -120,11 +133,13 @@ Every phase transition appears in the scheduled-event calendar.
 The integrator stops at the event, installs the next continuous segment, solves consistent algebraic initial values and resumes.
 A finite-width ramp is not substituted for a phase transition.
 
-The production calculation uses Solverz Rodas with KLU, JIT-compiled modules, relative tolerance $10^{-4}$, absolute tolerance $10^{-6}$, maximum step 0.01~s and output spacing 0.0025~s.
+The models are built and simulated in Solverz \cite{yu2026efficient}.
+Its integrator Rodas is a stiffly accurate Rosenbrock method of order four that controls the step size by an embedded error estimate.
+The production calculation uses Rodas with KLU, JIT-compiled modules, relative tolerance $10^{-4}$, absolute tolerance $10^{-6}$, maximum step 0.01~s and output spacing 0.0025~s.
 Consistent initialization uses tolerance $10^{-6}$.
 Model checks require equal equation and variable counts and initial residual below $10^{-10}$.
 Strict comparisons use relative tolerance $10^{-8}$ and absolute tolerance $10^{-10}$.
-The exact 12-group control also uses a paired rerun at relative tolerance $10^{-6}$ to resolve errors near the production tolerance.
+The exact 12-cluster control also uses a paired rerun at relative tolerance $10^{-6}$ to resolve errors near the production tolerance.
 
 For output $y$, set $d_F(t)=y_F(t)-y_F(0)$ and $d_E(t)=y_E(t)-y_E(0)$.
 Over the task window, the dynamic error is $\operatorname{RMS}(d_E-d_F)/\operatorname{RMS}(d_F)$.

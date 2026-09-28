@@ -30,6 +30,7 @@ These commands read saved results. They do not build an electrical model or run 
 - `data/scenarios.json` records node counts, task allocation, seeds, phase parameters and source records.
 - `data/groups.json` records the fixed memberships and feature scales.
 - `data/p2_summary.json` and `data/p3_summary.json` contain the frequency-domain and time-domain results.
+- `scripts/make_assets.py` writes every table under `tables/` from these files, including the eigenvalue distances of the modal comparison (`tables/mode_distance.tex`) and the DC-link voltage errors of the representative chains (`tables/internal_errors.tex`).
 - `data/S1_K4_selected.npz` and `data/S2_K8_selected.npz` contain selected columns at every saved output instant for the supplemental figures.
 - `data/source_manifest.json` records the original paths and SHA-256 hashes. `asset_sources.json` records the packaged inputs to the table and figure generator.
 

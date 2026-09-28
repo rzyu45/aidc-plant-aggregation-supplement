@@ -1,54 +1,58 @@
 \section{Additional Results and Applicability}
-\subsection{Complete group-count comparison}
+\subsection{Comparison over all numbers of clusters}
 A method comparison needs both favorable and unfavorable cases.
-Table~\ref{tab:all-band} gives every tested group count for the frozen electrical design, rather than only the selected equivalents.
-The response features need 4, 8 and 4 groups for S1, S2 and S3 to keep the upper-band PCC active-power error below 5\% at both inputs.
-The parameter features need 4, 12 and 6 groups.
-These are the smallest passing values among the tested even group counts.
+Table~\ref{tab:all-band} gives every tested number of clusters for the frozen electrical design, rather than only the selected equivalents.
+The response features need 4, 8 and 4 clusters for S1, S2 and S3 to keep the upper-band PCC active-power error below 5\% at both inputs.
+The parameter features need 4, 12 and 6 clusters.
+These are the smallest passing values among the tested even numbers of clusters.
 
-The coarse two-group equivalent gives a 32.37\% upper-band error in the S2 grouping case.
-Parameter grouping in S2 gives 14.40\% at four groups and 16.78\% at six groups.
-Increasing the group count therefore does not ensure decreasing error.
-In S1, parameter features give smaller band errors than response features at eight and ten groups.
-Both features use the same physical equivalent construction, so these comparisons concern the grouping rather than different equivalent formulas.
+The coarse two-cluster equivalent gives a 32.37\% upper-band error under the S2 clustering input.
+Parameter features in S2 give 14.40\% at four clusters and 16.78\% at six clusters.
+Increasing the number of clusters therefore does not ensure decreasing error.
+In S1, parameter features give smaller band errors than response features at eight and ten clusters.
+Both features use the same physical equivalent construction, so these comparisons concern the clustering rather than different equivalent formulas.
 \input{tables/band_errors}
 
 \subsection{PCC trajectories, offsets and internal voltages}
 Table~\ref{tab:all-time} reports both independent inputs and retains the initial PCC active-power offsets.
 A small dynamic error does not remove these offsets.
-The table includes the exact 12-group structural equivalent, whose small production-run differences arise at the solver tolerance.
+The table includes the exact 12-cluster structural equivalent, whose small production-run differences arise at the solver tolerance.
 The stricter paired control reduces its relative error to between $1.2\cdot10^{-6}$ and $8.7\cdot10^{-6}$ in the saved validation summary.
 \input{tables/time_errors}
 
 The local voltage response is a more demanding target than the common port.
 Fig.~\ref{fig:internal} compares the preselected representative chain of S1 with the equivalent containing its hall.
 This chain has the largest full-model voltage excursion.
-Parameter grouping combines its hall with halls 2 and 5, whereas response grouping keeps it separate.
+Parameter features combine its hall with halls 2 and 5, whereas response features keep it separate.
 The parameter-feature equivalent gives a 44.85\% dynamic RMS error for this voltage, even though its PCC active-power error is 1.34\%.
-The response-feature voltage error is 0.15\% because this hall remains a separate group.
-This accuracy does not establish preservation of the voltages in its other, merged groups.
-Across the recorded merged-hall comparisons, local voltage errors range from approximately 45\% to 69\%.
+The response-feature voltage error is 0.15\% because this hall remains a separate cluster.
+This accuracy does not establish preservation of the voltages in its other, merged clusters.
+Table~\ref{tab:internal} lists every comparison.
+When the representative hall shares its cluster with other halls, the dynamic error of its DC-link voltage is 44.85\% to 68.80\%.
+When the hall forms its own cluster, the error is 0.14\% to 0.24\%.
+The representative chain depends on the input, so in S2 it lies in hall 1 under the clustering input and in hall 8 under the test input.
 These errors describe differences relative to the voltage change from equilibrium.
-They are not a 45\% to 69\% deviation of the absolute operating voltage.
+They are not deviations of the absolute operating voltage.
 A model accepted for PCC response must not be used to infer the voltage stress of an individual merged chain.
+\input{tables/internal_errors}
 \begin{figure}[H]
 \centering\includegraphics[width=\textwidth]{internal_voltage.pdf}
-\caption{S1 with four groups at the grouping input.
+\caption{S1 with four clusters under the clustering input.
 A close PCC trajectory coexists with an inaccurate internal DC-link response.
 Both columns use the same models, with an overview and a common event window.
 The equivalent voltage is that of the chain containing the selected full-model hall.}
 \label{fig:internal}
 \end{figure}
 
-Increasing the model order can also reduce the difference between grouping methods.
-Fig.~\ref{fig:similar} shows the S2 eight-group case.
-Its PCC active-power dynamic errors are 1.06\% for parameter features and 1.03\% for response features at the grouping input.
+Increasing the model order can also reduce the difference between the feature sets.
+Fig.~\ref{fig:similar} shows S2 with eight clusters.
+Its PCC active-power dynamic errors are 1.06\% for parameter features and 1.03\% for response features under the clustering input.
 The corresponding test values are 1.22\% and 1.21\%.
 This case supports comparable time-domain accuracy, rather than a substantial advantage of either method.
-The frequency-domain criterion still distinguishes the two, since their grouping-input band errors are 5.38\% and 4.58\%.
+The frequency-domain criterion still distinguishes the two, since their band errors under the clustering input are 5.38\% and 4.58\%.
 \begin{figure}[H]
 \centering\includegraphics[width=\textwidth]{similar_accuracy.pdf}
-\caption{S2 with eight groups at the grouping input.
+\caption{S2 with eight clusters under the clustering input.
 Both feature sets give similar PCC active-power trajectories and dynamic errors.}
 \label{fig:similar}
 \end{figure}
@@ -56,11 +60,14 @@ Both feature sets give similar PCC active-power trajectories and dynamic errors.
 \subsection{Numerical checks and cost interpretation}
 All six full-model operating points are stable after excluding the common-angle zero mode.
 The largest remaining real part lies near $-0.117$~s$^{-1}$.
-At the grouping operating points, the full model has 1873 equations and variables, with initial residual at most $5.8\cdot10^{-12}$.
+At the operating points of the clustering inputs, the full model has 1873 equations and variables, with initial residual at most $5.8\cdot10^{-12}$.
 A two-second stationary check gives drift at most $4.5\cdot10^{-13}$.
-The 12-group port response differs from the full response by at most $9.3\cdot10^{-13}$ in the small-signal comparison.
+The 12-cluster port response differs from the full response by at most $9.3\cdot10^{-13}$ in the small-signal comparison.
 
-The six phase-input full-model runs keep the recorded converter-current measure below 0.689~p.u., the modulation ratio below 1.142 and the DC-link voltage between 0.876 and 1.113~p.u.
+The six phase-input full-model runs keep the AFE and VSI currents below 0.689~p.u., their modulation ratio below 1.142 and the DC-link voltage between 0.876 and 1.113~p.u.
+The modulation ratio is the modulation index divided by its value at the operating point.
+The ratio is used because the absolute index depends on the DC-side per-unit base, which the source model does not fix.
+The reference levels of this study are 1~p.u. for the current and 1.2 for the ratio, the upper end of a 10\% to 20\% design headroom.
 These checks establish the reference model's behavior for the selected inputs.
 They do not validate converter protection or establish field operating limits.
 
@@ -69,7 +76,8 @@ The exact hall equivalents take 12.76, 28.94 and 12.19~s.
 The smaller models in the main table take approximately 10 to 27~s.
 The build and integration records, including the three timing rounds, are retained in \path{data/p3_summary.json}.
 Model size falls more than runtime because phase events and 0.01~s input knots remain in every model.
-The reported timing therefore supports an implementation-specific reduction by a factor of 1.3 to 1.6.
+The exact 12-cluster equivalents run 1.33 to 1.38 times faster than the full model, and the smaller equivalents 1.44 to 1.64 times faster.
+Relative to the exact 12-cluster equivalent, the smaller equivalents run 1.08 to 1.20 times faster, which is the gain of merging different halls.
 
 \subsection{Evidence limits}
 The fast inputs combine literature timing with measured node-power levels.
