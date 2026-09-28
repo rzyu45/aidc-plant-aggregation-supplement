@@ -1,86 +1,108 @@
-\section{Additional Results and Applicability}
-\subsection{Complete group-count comparison}
-A method comparison needs both favorable and unfavorable cases.
-Table~\ref{tab:all-band} gives every tested group count for the frozen electrical design, rather than only the selected equivalents.
-The response features need 4, 8 and 4 groups for S1, S2 and S3 to keep the upper-band PCC active-power error below 5\% at both inputs.
-The parameter features need 4, 12 and 6 groups.
-These are the smallest passing values among the tested even group counts.
+\section{Additional Comparison Results}
+\label{sec:results}
+\subsection{Task-to-PCC response}
+\label{sec:freq}
+The band error of a task depends on the halls that host it, as \eqref{eq:task-error} shows.
+Table~\ref{tab:task-band} therefore gives the active-power comparison for every task and both realizations.
+The inference task appears because its allocation defines a task-to-PCC response.
+Its power is constant within each window, so it does not excite this response in the time-domain runs.
+Its resonance-band error ranges from 5.63\% to 5.83\%.
+These values are close to the band error of the plant-wide job of S1, since the inference nodes also occupy every hall.
+\input{tables/band_tasks}
 
-The coarse two-group equivalent gives a 32.37\% upper-band error in the S2 grouping case.
-Parameter grouping in S2 gives 14.40\% at four groups and 16.78\% at six groups.
-Increasing the group count therefore does not ensure decreasing error.
-In S1, parameter features give smaller band errors than response features at eight and ten groups.
-Both features use the same physical equivalent construction, so these comparisons concern the grouping rather than different equivalent formulas.
-\input{tables/band_errors}
+Table~\ref{tab:output-band} gives the largest band error over the jobs for each of the four outputs.
+In the realization used in the paper, the largest value in the resonance band is 7.38\%, 30.47\% and 11.57\% for S1, S2 and S3.
+The reactive power gives this value in S1 and S3, and the PCC voltage in S2.
+The second realization changes the band error of every task, output and band by at most 0.61 percentage points.
+\input{tables/band_outputs}
 
-\subsection{PCC trajectories, offsets and internal voltages}
-Table~\ref{tab:all-time} reports both independent inputs and retains the initial PCC active-power offsets.
-A small dynamic error does not remove these offsets.
-The table includes the exact 12-group structural equivalent, whose small production-run differences arise at the solver tolerance.
-The stricter paired control reduces its relative error to between $1.2\cdot10^{-6}$ and $8.7\cdot10^{-6}$ in the saved validation summary.
-\input{tables/time_errors}
+Table~\ref{tab:hall-band} gives the single-hall and uniform-input band errors.
+Over the six inputs, a unit input in one hall gives band errors from 5.46\% to 53.17\%, and the uniform input gives 4.57\% to 4.64\%.
+Hall~1 gives the largest and hall~12 the smallest single-hall error at every operating point.
+These errors depend on the scenario only through its operating point, so the six columns nearly coincide.
+\input{tables/band_halls}
 
-The local voltage response is a more demanding target than the common port.
-Fig.~\ref{fig:internal} compares the preselected representative chain of S1 with the equivalent containing its hall.
-This chain has the largest full-model voltage excursion.
-Parameter grouping combines its hall with halls 2 and 5, whereas response grouping keeps it separate.
-The parameter-feature equivalent gives a 44.85\% dynamic RMS error for this voltage, even though its PCC active-power error is 1.34\%.
-The response-feature voltage error is 0.15\% because this hall remains a separate group.
-This accuracy does not establish preservation of the voltages in its other, merged groups.
-Across the recorded merged-hall comparisons, local voltage errors range from approximately 45\% to 69\%.
-These errors describe differences relative to the voltage change from equilibrium.
-They are not a 45\% to 69\% deviation of the absolute operating voltage.
-A model accepted for PCC response must not be used to infer the voltage stress of an individual merged chain.
-\begin{figure}[H]
-\centering\includegraphics[width=\textwidth]{internal_voltage.pdf}
-\caption{S1 with four groups at the grouping input.
-A close PCC trajectory coexists with an inaccurate internal DC-link response.
-Both columns use the same models, with an overview and a common event window.
-The equivalent voltage is that of the chain containing the selected full-model hall.}
+Table~\ref{tab:modes} lists the modes between 3 and 20~Hz that reach 10\% of the largest contribution of the full model.
+The full model has 13 to 15 such modes, whereas the equivalent has one in S2 and three in S1 and S3.
+\input{tables/modes}
+
+\subsection{Time-domain response}
+\label{sec:time}
+Table~\ref{tab:dynamic} gives the dynamic errors of the four outputs for both realizations, the initial offsets and the spectral share of the active-power error.
+The dynamic error of the PCC active power ranges from 1.46\% to 5.94\%, and S2 gives the largest error of every output in both realizations.
+The equivalent starts with a PCC active power between 6.41 and 7.72~kW below that of the full model, because its losses at the operating point differ from those of the full model.
+The initial frequency offset is zero in every run.
+Between 73.7\% and 82.7\% of the variance of the active-power error lies between 3 and 9~Hz, inside the resonance band.
+\input{tables/dynamic}
+
+A strict rerun checks whether the production tolerance affects these errors.
+It repeats both models for S2 in the realization used in the paper at relative tolerance $10^{-8}$ and absolute tolerance $10^{-10}$.
+The dynamic error of the PCC active power is then 5.6929\%, against 5.6924\% in the production run, a difference of 0.0005 percentage points.
+The largest change of the other three outputs is 0.0018 percentage points.
+
+\subsection{Internal variables}
+\label{sec:internal}
+The paper shows the internal variables of S2 in its Fig.~4.
+Table~\ref{tab:internal} gives their peak deviations for all three scenarios in the realization used in the paper.
+For every block variable, the equivalent deviates less than the most strongly excited hall of the full model.
+The ratio ranges from 0.19 to 0.37 in S2 and from 0.56 to 0.81 in S1 and S3.
+In S2, the equivalent also deviates less than every hall, because the six independent jobs partly cancel in the total server power that drives it.
+In S1 and S3, its peak deviations lie within the range of the halls.
+The largest peak deviation of the AC input power among the halls exceeds that of the server power by a factor of 1.5 to 1.7 in every scenario.
+\input{tables/internal}
+
+Fig.~\ref{fig:internal} shows S1 and S3 in the layout of Fig.~4 of the paper.
+Each column uses the window registered for its scenario from the input alone.
+The window begins 0.5~s before the phase transition with the largest step of the total server power and ends 1.5~s after it, widened to the nearest axis ticks.
+This step is $-3.67$~MW at 9.42~s in S1 and $-2.58$~MW at 36.23~s in S3.
+Each phase transition is a step of the server power in the halls that host the job.
+The step starts a damped oscillation of their AC input power, DC-link voltage and PSU output voltage.
+In both scenarios, the PCC active power of the two models nearly coincides, whereas the DC-link and PSU output voltages of the halls spread around the one trace of the equivalent.
+\begin{figure}[tbp]
+\centering\includegraphics[width=\textwidth]{internal_variables.pdf}
+\caption{Internal variables of S1 in the left column and of S3 in the right column, in the realization used in the paper.
+(a) Server power $P_{{\rm IT},h}$ and (b) AC input power $P_{{\rm AC},h}$ of every hall.
+(c) Change of the PCC active power.
+(d) DC-link voltage $v_d$, (e) PSU output voltage $v_p$ and (f) server voltage $v_e$ of every hall.
+Black lines show the PCC or the hall with the largest DC-link excursion of the full model in the shown window, which is hall~1 in S1 and hall~2 in S3.
+Grey lines show the other halls, and dashed lines the single-block equivalent.}
 \label{fig:internal}
 \end{figure}
 
-Increasing the model order can also reduce the difference between grouping methods.
-Fig.~\ref{fig:similar} shows the S2 eight-group case.
-Its PCC active-power dynamic errors are 1.06\% for parameter features and 1.03\% for response features at the grouping input.
-The corresponding test values are 1.22\% and 1.21\%.
-This case supports comparable time-domain accuracy, rather than a substantial advantage of either method.
-The frequency-domain criterion still distinguishes the two, since their grouping-input band errors are 5.38\% and 4.58\%.
-\begin{figure}[H]
-\centering\includegraphics[width=\textwidth]{similar_accuracy.pdf}
-\caption{S2 with eight groups at the grouping input.
-Both feature sets give similar PCC active-power trajectories and dynamic errors.}
-\label{fig:similar}
-\end{figure}
+\subsection{Numerical checks}
+\label{sec:checks}
+The single-block equivalent passes its registered gates at all six operating points.
+The equivalent has 179 equations and variables, and the full model has 1873.
+Over the six operating points, the largest initial residual is $4.0\cdot10^{-12}$ for the equivalent and $5.8\cdot10^{-12}$ for the full model.
+The server power of the equivalent equals that of the full model and of the scenario within $5.8\cdot10^{-12}$~MW, and its static loads equal those of the full model.
+A two-second run without input checks that each operating point is an equilibrium.
+The largest change of any variable of the equivalent is $5.1\cdot10^{-13}$, and that of the full model is $4.5\cdot10^{-13}$ at the three operating points of the realization used in the paper.
+Both models are stable at all six operating points apart from the zero mode of the common rotor angle.
+The largest remaining real part of the full model is $-0.117$~s$^{-1}$.
+In the positive control of Section~\ref{sec:equivalent}, each eigenvalue of the equivalent is compared with the nearest eigenvalue of the full model.
+Their distance is divided by one plus the magnitude of the eigenvalue of the equivalent.
+The largest normalized distance is $9.1\cdot10^{-12}$.
 
-\subsection{Numerical checks and cost interpretation}
-All six full-model operating points are stable after excluding the common-angle zero mode.
-The largest remaining real part lies near $-0.117$~s$^{-1}$.
-At the grouping operating points, the full model has 1873 equations and variables, with initial residual at most $5.8\cdot10^{-12}$.
-A two-second stationary check gives drift at most $4.5\cdot10^{-13}$.
-The 12-group port response differs from the full response by at most $9.3\cdot10^{-13}$ in the small-signal comparison.
-
-The six phase-input full-model runs keep the recorded converter-current measure below 0.689~p.u., the modulation ratio below 1.142 and the DC-link voltage between 0.876 and 1.113~p.u.
-These checks establish the reference model's behavior for the selected inputs.
-They do not validate converter protection or establish field operating limits.
-
-Serial integration of 61~s takes median times of 17.56, 38.62 and 16.71~s for the full model in S1, S2 and S3.
-The exact hall equivalents take 12.76, 28.94 and 12.19~s.
-The smaller models in the main table take approximately 10 to 27~s.
-The build and integration records, including the three timing rounds, are retained in \path{data/p3_summary.json}.
-Model size falls more than runtime because phase events and 0.01~s input knots remain in every model.
-The reported timing therefore supports an implementation-specific reduction by a factor of 1.3 to 1.6.
+The internal-variable reruns reproduce the production runs of both models, with zero difference in the PCC active power and in the DC-link voltage at every output instant.
+The four blocks of every hall of the full model agree in every recorded variable within $4.4\cdot10^{-14}$.
+The six task-driven runs of the full model keep the converter current below 0.690~p.u., every modulation index below 1.143 times its operating-point value and the DC-link voltage between 0.875 and 1.113~p.u.
 
 \subsection{Evidence limits}
+One construction of the single-block equivalent was tested, namely the capacity-weighted average block of Section~\ref{sec:equivalent}.
+A single nominal block scaled to the plant rating was not tested.
+The comparisons use one electrical design of the 12 halls.
+Its parameter ranges are study assumptions and do not form a measured distribution of data-center equipment.
+
 The fast inputs combine literature timing with measured node-power levels.
 They are constructed scenarios.
-They do not constitute measured PCC transients, measured synchronization across an operating facility, or a high-bandwidth measurement of the NLR training cycles.
+They do not constitute measured PCC transients, measured synchronization across an operating facility or a high-bandwidth measurement of the NLR training cycles.
+The polling intervals of the NLR records do not establish the sensor bandwidth.
+The phase parameters are the experimental settings of \cite{ko2026oscillations} and not universal workload limits.
 Inference remains at a constant request rate within each task window.
+The selected job size of 0.125 of the baseline job slots is not a maximum safe job size for a physical facility.
 
-The main comparisons use one electrical design.
-Earlier random-design experiments use different, slower input conditions and remain separate historical evidence.
-They do not establish the same error values for the phase inputs.
+The averaged supply-block model excludes switching ripple, current and modulation limits, protection, battery discharge and bypass switching.
+The checks of Section~\ref{sec:checks} therefore describe the response of the model to the selected inputs and do not validate converter protection or field operating limits.
 The quasi-static network represents electromagnetic line behavior only through fixed-frequency impedances.
 A network with differential electromagnetic states is required to test the resulting approximation across the full 20~Hz band.
-The supply-chain model excludes switching ripple, device limiting, protection and battery-only operation.
-The present conclusions concern task-driven PCC quantities under the stated conditions.
+The present conclusions concern task-driven PCC quantities and block variables under the stated conditions.

@@ -1,0 +1,42 @@
+{
+ "registered": "2026-09-23, before any result of the single-block equivalent exists",
+ "purpose": "case study of the revised paper: the full plant model F against the single-block equivalent that grid studies use, one supply block for the whole plant driven by the total server power",
+ "model": "K01_1f243e: s1_single.single_spec. One block rated at the sum of the 48 ratings, parameters by s1_spec.group_params with the gain rule 'gains'; T1 and T2, the 12 feeders and the 48 unit transformers each merged into one equal-loss element weighted by the initial active flows of F, feeder charging summed, one MV bus; cooling summed into one constant-power load at the equivalent hall bus, the two auxiliary loads into one constant-impedance load at the MV bus, the remainder at bus 8 unchanged. Its source checksum is recorded in p5_manifest.json",
+ "reference": "F: the small-signal results of P2 and the production and strict time-domain runs of P3, read as they are",
+ "inputs": [
+  "S1_phase_build",
+  "S1_phase_test",
+  "S2_phase_build",
+  "S2_phase_test",
+  "S3_phase_build",
+  "S3_phase_test"
+ ],
+ "small_signal": "the P2 definitions without change: 601-point grid from 0.1 to 20 Hz; band error per task and output, RMS of the complex difference over 0.1 to 3 Hz and over above 3 to 20 Hz divided by the RMS of the response of F; refined peak gain and frequency; phase difference at the grid frequency of the largest gain of F; modes by s1_summarize.modes; for the figure, the oscillatory modes between 3 and 20 Hz whose contribution reaches 10 percent of the largest contribution of F over the tasks",
+ "time_domain": "the P3 definitions without change: Rodas, KLU, --tol paper (rtol 1e-4, atol 1e-6, hmax 0.01 s, output every 0.0025 s, tol_ic 1e-6); errors over 1 s to 61 s on deviations from each model's own initial value; s1_paper_p3.td_errors, error_spectrum and screen_of",
+ "strict": "S2_phase_build: K = 1 at --tol main (rtol 1e-8, atol 1e-10), paired with the strict run of F of the same input",
+ "rerun_rule": "a reported time-domain difference below 0.1 percent is rerun at rtol 1e-6, as in P3",
+ "internal": {
+  "inputs": [
+   "S1_phase_build",
+   "S2_phase_build",
+   "S3_phase_build"
+  ],
+  "models": [
+   "F",
+   "K01_1f243e"
+  ],
+  "tol": "paper",
+  "per_hall": "first block of every hall of F, the one block of K = 1: DC-link voltage, AFE and VSI current magnitudes, AFE and VSI modulation indices, AC input power, VSI AC-bus voltage magnitude, PSU voltage, DC-DC voltage, server power",
+  "buses": "voltage magnitudes of the PCC, of every MV bus and of every hall bus",
+  "gates": {
+   "determinism": "the internal run of each model reproduces its production run: PCC active power to 1e-09 MW, DC-link voltage to 1e-12 p.u.",
+   "hall_spread": "the four blocks of a hall of F agree to 1e-10 in every recorded variable"
+  }
+ },
+ "gates": {
+  "per_input": "equations equal variables; initial residual below 1e-10; server power of K = 1 equal to that of F and of the scenario to 1e-9 MW; every hall maps to the one block; static loads equal to those of F; a 2 s run without input stays at the equilibrium; the offset of the bus demand from 315 MW is reported, since the conversion losses of the equivalent differ",
+  "positive_control": "nominal design in every hall, 6 MW per hall: K = 1 against F, normalized difference of the PCC responses below 1e-9 on every 12th point of the grid, every eigenvalue of K = 1 among those of F"
+ },
+ "figure_input": "S2_phase_build",
+ "never": "no rule, input, window, tolerance or error definition is changed after a result of the single-block equivalent has been seen; no failure is hidden by a change of parameters"
+}

@@ -1,0 +1,40 @@
+{\small\setlength{\tabcolsep}{4.5pt}\setlength{\LTcapwidth}{\textwidth}
+\begin{longtable}{lllrrrrrrr}
+\caption{Task-to-PCC Active-Power Comparison for Every Task and Both Realizations.
+Paper Denotes the Realization Used in the Paper.
+The Six Jobs of S2 Are Training Jobs.}\label{tab:task-band}\\
+\toprule
+ & & & \multicolumn{2}{c}{Band error, \%} & \multicolumn{2}{c}{Full model peak} & \multicolumn{2}{c}{Equivalent peak} & Phase\\
+Scenario & Task & Realization & 0.1--3 Hz & 3--20 Hz & Gain & Hz & Gain & Hz & deg\\\midrule
+\endfirsthead
+\toprule
+ & & & \multicolumn{2}{c}{Band error, \%} & \multicolumn{2}{c}{Full model peak} & \multicolumn{2}{c}{Equivalent peak} & Phase\\
+Scenario & Task & Realization & 0.1--3 Hz & 3--20 Hz & Gain & Hz & Gain & Hz & deg\\\midrule
+\endhead
+S1 & training & paper & 1.33 & 5.82 & 1.904 & 5.33 & 1.978 & 5.49 & 3.2 \\*
+ &  & second & 1.32 & 5.74 & 1.891 & 5.31 & 1.964 & 5.47 & 3.1 \\
+S1 & inference & paper & 1.33 & 5.83 & 1.904 & 5.33 & 1.978 & 5.49 & 3.2 \\*
+ &  & second & 1.32 & 5.74 & 1.891 & 5.31 & 1.964 & 5.47 & 3.1 \\
+\midrule
+S2 & job 1 & paper & 5.18 & 27.84 & 1.872 & 4.83 & 1.978 & 5.49 & 15.2 \\*
+ &  & second & 5.14 & 27.45 & 1.859 & 4.80 & 1.963 & 5.47 & 14.9 \\
+S2 & job 2 & paper & 3.10 & 21.33 & 2.143 & 6.24 & 1.978 & 5.49 & $-$13.9 \\*
+ &  & second & 3.06 & 21.02 & 2.120 & 6.20 & 1.963 & 5.47 & $-$13.7 \\
+S2 & job 3 & paper & 0.95 & 13.86 & 2.174 & 6.02 & 1.978 & 5.49 & 0.1 \\*
+ &  & second & 0.92 & 13.33 & 2.147 & 5.97 & 1.963 & 5.47 & $-$0.1 \\
+S2 & job 4 & paper & 4.56 & 24.54 & 1.901 & 5.01 & 1.978 & 5.49 & 13.4 \\*
+ &  & second & 4.53 & 24.19 & 1.886 & 4.99 & 1.963 & 5.47 & 13.2 \\
+S2 & job 5 & paper & 0.76 & 10.57 & 1.876 & 5.09 & 1.978 & 5.49 & 1.0 \\*
+ &  & second & 0.75 & 10.27 & 1.867 & 5.08 & 1.963 & 5.47 & 1.0 \\
+S2 & job 6 & paper & 0.54 & 7.50 & 1.871 & 5.50 & 1.978 & 5.49 & $-$2.8 \\*
+ &  & second & 0.54 & 7.30 & 1.860 & 5.48 & 1.963 & 5.47 & $-$2.7 \\
+S2 & inference & paper & 1.33 & 5.83 & 1.904 & 5.33 & 1.978 & 5.49 & 3.2 \\*
+ &  & second & 1.32 & 5.73 & 1.891 & 5.31 & 1.963 & 5.47 & 3.1 \\
+\midrule
+S3 & training & paper & 1.82 & 9.55 & 1.893 & 5.19 & 1.979 & 5.50 & 5.5 \\*
+ &  & second & 1.81 & 9.41 & 1.879 & 5.17 & 1.963 & 5.47 & 5.4 \\
+S3 & fine-tuning & paper & 0.98 & 4.74 & 1.918 & 5.33 & 1.979 & 5.50 & 2.7 \\*
+ &  & second & 0.97 & 4.65 & 1.904 & 5.31 & 1.963 & 5.47 & 2.6 \\
+S3 & inference & paper & 1.33 & 5.72 & 1.905 & 5.34 & 1.979 & 5.50 & 3.1 \\*
+ &  & second & 1.32 & 5.63 & 1.891 & 5.31 & 1.963 & 5.47 & 3.0 \\
+\bottomrule\end{longtable}}

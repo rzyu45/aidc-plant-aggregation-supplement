@@ -1,98 +1,188 @@
 {
-  "case/plant/results/stage1_paper/p1_candidates/jobshare_0125/scenarios.json": {
-    "artifact": "data/scenarios.json",
-    "sha256": "869e4004cf6833ac6481c433adc565b5439134b48e75fad85bd01a84374ffe6c"
+  "sources": {
+    "case/plant/results/stage1_paper/p1_candidates/jobshare_0125/scenarios.json": {
+      "sha256": "869e4004cf6833ac6481c433adc565b5439134b48e75fad85bd01a84374ffe6c",
+      "artifacts": [
+        "data/scenarios.json"
+      ],
+      "use": "copied unchanged"
+    },
+    "case/plant/results/stage1_paper/p1_candidates/jobshare_0125/operating_points.json": {
+      "sha256": "913d04ce4379d8a184090e4fed2176ba6e06449ee1711b4cec74d54facd3da97",
+      "artifacts": [
+        "data/operating_points.json"
+      ],
+      "use": "copied unchanged"
+    },
+    "case/plant/results/stage1_paper/p1_candidates/jobshare_0125/inference_map.json": {
+      "sha256": "c9c4c2b2a41b78d4f8f1ab95b77578d115b6fcd299eeda9ca0bec8b8099ecdfc",
+      "artifacts": [
+        "data/inference_map.json"
+      ],
+      "use": "copied unchanged"
+    },
+    "case/plant/results/stage1_paper/p1_candidates/jobshare_0125/checks.json": {
+      "sha256": "452c40bb0985670b510b91bfa3fddb0efae8775803ccf0f1810861257c5ad15b",
+      "artifacts": [
+        "data/checks.json"
+      ],
+      "use": "copied unchanged"
+    },
+    "case/plant/results/stage1_paper/p1_candidates/jobshare_0125/p5_summary.json": {
+      "sha256": "3b9f2edc0292242a5d52f020d928576ed95e70ead767fdde7a6b5947dc17d57a",
+      "artifacts": [
+        "data/p5_summary.json"
+      ],
+      "use": "copied unchanged"
+    },
+    "case/plant/results/stage1_paper/p1_candidates/jobshare_0125/p5_registration.json": {
+      "sha256": "ccdb58ea4fc0dac337435c19a326362f9387c9e8265b76e3de3fe4d10c205550",
+      "artifacts": [
+        "data/p5_registration.json"
+      ],
+      "use": "copied unchanged"
+    },
+    "case/plant/results/stage1_v1/design.json": {
+      "sha256": "cd3dfb2e0d36f62250afea321db3177633ca233b17573976e5d54b6659cff441",
+      "artifacts": [
+        "data/design.json"
+      ],
+      "use": "copied unchanged"
+    },
+    "SolPSDyn/dae/dc1a_sp.py": {
+      "sha256": "ad812566dceea03f338bfe5e1c29c5f36423aa8844945acb8486939abde3eae3",
+      "artifacts": [
+        "data/grid_parameters.json"
+      ],
+      "use": "read-only source of grid parameter dictionaries"
+    },
+    "SolPSDyn/dae/zhao2026_ibr.py": {
+      "sha256": "b7e9202bce1d2209dbeab65bd5c24c3f07bf9b29e2f304e77869d19f85256a73",
+      "artifacts": [
+        "data/grid_parameters.json"
+      ],
+      "use": "read-only source of grid parameter dictionaries"
+    },
+    "case/wscc9/wscc9_data.py": {
+      "sha256": "39ada305ae54aa64b9d2215a2297849220391739facd900ef95395a098af3015",
+      "artifacts": [
+        "data/grid_parameters.json"
+      ],
+      "use": "external network branches and base conversion"
+    },
+    "case/plant/results/stage1_paper/p1_candidates/jobshare_0125/p2_summary.json": {
+      "sha256": "1676f52a470cc27dbe5ba49a38fa05e59464c1ffe5ad7da11f2cee19a0fef99e",
+      "artifacts": [
+        "data/full_model_checks.json"
+      ],
+      "use": "blocks 'F' and 'gates' extracted without change"
+    },
+    "case/plant/results/stage1_paper/p1_candidates/jobshare_0125/p3_summary.json": {
+      "sha256": "9fa5e8ebbdf1ab2b9c387122ec50896aa6f14de6ab925ab5f2c74a385530a03b",
+      "artifacts": [
+        "data/full_model_checks.json",
+        "data/S1_internal.npz",
+        "data/S3_internal.npz"
+      ],
+      "use": "block 'screen_F' extracted without change",
+      "use_zoom": "'zoom' block: window registered for S1_phase_build, S3_phase_build"
+    },
+    "case/plant/results/stage1_paper/p1_candidates/jobshare_0125/p5_internal/S1_phase_build__F__internal.npz": {
+      "sha256": "7744d4869dfe449dd0340c0539124128cd69bf5463659240cad6b80cd6572847",
+      "artifacts": [
+        "data/S1_internal.npz"
+      ],
+      "use": "saved columns of the full model under S1_phase_build: P_MW, p_it_mw, p_ac_mw, v_dc, v_psu, v_eq"
+    },
+    "case/plant/results/stage1_paper/p1_candidates/jobshare_0125/p5_internal/S1_phase_build__K01_1f243e__internal.npz": {
+      "sha256": "07fd0344ab97674d75e60d30beaec4d1cbca2730d758e1aa8cde36bc2c437049",
+      "artifacts": [
+        "data/S1_internal.npz"
+      ],
+      "use": "saved columns of the single-block equivalent under S1_phase_build: P_MW, v_dc, v_psu, v_eq"
+    },
+    "case/plant/results/stage1_paper/p1_candidates/jobshare_0125/p5_internal/S3_phase_build__F__internal.npz": {
+      "sha256": "0ae6ce645a4157f70126776c30266ad47ed2e886f22213b577fd0fcba3c4300e",
+      "artifacts": [
+        "data/S3_internal.npz"
+      ],
+      "use": "saved columns of the full model under S3_phase_build: P_MW, p_it_mw, p_ac_mw, v_dc, v_psu, v_eq"
+    },
+    "case/plant/results/stage1_paper/p1_candidates/jobshare_0125/p5_internal/S3_phase_build__K01_1f243e__internal.npz": {
+      "sha256": "77d8ebc9068d38733e00c23b039f1f08e58640885a6f7b43f6560cf7ce1775c0",
+      "artifacts": [
+        "data/S3_internal.npz"
+      ],
+      "use": "saved columns of the single-block equivalent under S3_phase_build: P_MW, v_dc, v_psu, v_eq"
+    },
+    "SolPSDyn/dae/datacenter.py": {
+      "sha256": "53c5a15d5071e70d10b120b1c343832d06858d47ab4d0f9a984a763f9f60ea15",
+      "use": "equation and method audit; no new execution"
+    },
+    "case/plant/plant_spec.py": {
+      "sha256": "b1ab2c5209fc64d17f9cc6db2c223b9855de6b0c4053c141809185aa2fea00cb",
+      "use": "equation and method audit; no new execution"
+    },
+    "case/plant/stage1/s1_spec.py": {
+      "sha256": "28973a69aae48405f6bcfd6906c5fce237d17a06c69f06f5574327c285f0f293",
+      "use": "equation and method audit; no new execution"
+    },
+    "case/plant/stage1/s1_single.py": {
+      "sha256": "153e6aa5c70d1bd2b18292ef695b509653f53cc2e19da2bcae23da0d168e5355",
+      "use": "equation and method audit; no new execution"
+    },
+    "case/plant/stage1/s1_models.py": {
+      "sha256": "5f6d21eeb613817e375d6b60f2ad25e58fd365c2514e71cc502fef8792d9c52e",
+      "use": "equation and method audit; no new execution"
+    },
+    "case/plant/stage1/s1_paper_inputs.py": {
+      "sha256": "269b3ad3b8665a2faf553d1462a2d82247100ff9ab3fd7192605434566921ed6",
+      "use": "equation and method audit; no new execution"
+    },
+    "case/plant/stage1/s1_paper_td.py": {
+      "sha256": "ea2d2ccf4af29d1238edf81ab3beae645c03273d9dadad7183ac23577a4ef738",
+      "use": "equation and method audit; no new execution"
+    },
+    "case/plant/stage1/s1_paper_p5.py": {
+      "sha256": "461d5d319971326c0bed2767dd28e88642a846e47d62cb02ad759b73660f9539",
+      "use": "equation and method audit; no new execution"
+    },
+    "case/plant/stage1/s1_gates.py": {
+      "sha256": "d5b2a569e6058e4a3e126d32f45fa003f1dd856164c0c3a042cae77c0c963bed",
+      "use": "equation and method audit; no new execution"
+    },
+    "case/plant/stage1/s1_smallsignal.py": {
+      "sha256": "e34b974c49ceb542a931d06b0422a5c8de903c3ebcd2bd5bee9e8aa8fb1d7e03",
+      "use": "equation and method audit; no new execution"
+    },
+    "case/plant/run_smallsignal.py": {
+      "sha256": "51903ad3912af98f083c962b86a86500fe35e28c1e3e4e8d6058d0beb0be69f0",
+      "use": "equation and method audit; no new execution"
+    },
+    "case/plant/stage1/s1_summarize.py": {
+      "sha256": "85dc80fe56f53a566b2090eb1928ed6104958116cf53060378f51fe85cbe927f",
+      "use": "equation and method audit; no new execution"
+    },
+    "case/plant/stage1/s1_paper_p2.py": {
+      "sha256": "cbabb0e7dcbe8d26e45b40530593a648ba450a82be415a3be943ccc63eee6ff1",
+      "use": "equation and method audit; no new execution"
+    },
+    "case/plant/stage1/s1_paper_p3.py": {
+      "sha256": "8b8508166259645809e5d70f6386af4fca35b17f6e1ede5876384cc03e4deec3",
+      "use": "equation and method audit; no new execution"
+    }
   },
-  "case/plant/results/stage1_paper/p1_candidates/jobshare_0125/groups.json": {
-    "artifact": "data/groups.json",
-    "sha256": "3068264f27b505d23ccb0fdb3102efe7534f5481f3a6584834fa4e8378e5954a"
-  },
-  "case/plant/results/stage1_paper/p1_candidates/jobshare_0125/p2_summary.json": {
-    "artifact": "data/p2_summary.json",
-    "sha256": "1676f52a470cc27dbe5ba49a38fa05e59464c1ffe5ad7da11f2cee19a0fef99e"
-  },
-  "case/plant/results/stage1_paper/p1_candidates/jobshare_0125/p3_summary.json": {
-    "artifact": "data/p3_summary.json",
-    "sha256": "9fa5e8ebbdf1ab2b9c387122ec50896aa6f14de6ab925ab5f2c74a385530a03b"
-  },
-  "case/plant/results/stage1_paper/p1_candidates/jobshare_0125/operating_points.json": {
-    "artifact": "data/operating_points.json",
-    "sha256": "913d04ce4379d8a184090e4fed2176ba6e06449ee1711b4cec74d54facd3da97"
-  },
-  "case/plant/results/stage1_paper/p1_candidates/jobshare_0125/inference_map.json": {
-    "artifact": "data/inference_map.json",
-    "sha256": "c9c4c2b2a41b78d4f8f1ab95b77578d115b6fcd299eeda9ca0bec8b8099ecdfc"
-  },
-  "case/plant/results/stage1_paper/p1_candidates/jobshare_0125/checks.json": {
-    "artifact": "data/checks.json",
-    "sha256": "452c40bb0985670b510b91bfa3fddb0efae8775803ccf0f1810861257c5ad15b"
-  },
-  "case/plant/results/stage1_paper/p1_candidates/jobshare_0125/p2_registration.json": {
-    "artifact": "data/p2_registration.json",
-    "sha256": "1f5c9adcbf5536ad6ea3260083a7d6bb17afd94091b00a61f9746233c7753309"
-  },
-  "case/plant/results/stage1_paper/p1_candidates/jobshare_0125/p3_registration.json": {
-    "artifact": "data/p3_registration.json",
-    "sha256": "0d13bad2d26d3a89ac197e6625632462d998154a10d29c72df1af4bd03c4fd0c"
-  },
-  "case/plant/results/stage1_v1/design.json": {
-    "artifact": "data/design.json",
-    "sha256": "cd3dfb2e0d36f62250afea321db3177633ca233b17573976e5d54b6659cff441"
-  },
-  "SolPSDyn/dae/dc1a_sp.py": {
-    "sha256": "ad812566dceea03f338bfe5e1c29c5f36423aa8844945acb8486939abde3eae3",
-    "purpose": "read-only source of grid parameter dictionaries"
-  },
-  "SolPSDyn/dae/zhao2026_ibr.py": {
-    "sha256": "b7e9202bce1d2209dbeab65bd5c24c3f07bf9b29e2f304e77869d19f85256a73",
-    "purpose": "read-only source of grid parameter dictionaries"
-  },
-  "case/wscc9/wscc9_data.py": {
-    "sha256": "39ada305ae54aa64b9d2215a2297849220391739facd900ef95395a098af3015",
-    "purpose": "external network branches and base conversion"
-  },
-  "SolPSDyn/dae/datacenter.py": {
-    "sha256": "53c5a15d5071e70d10b120b1c343832d06858d47ab4d0f9a984a763f9f60ea15",
-    "purpose": "equation and method audit; no new execution"
-  },
-  "case/plant/stage1/s1_spec.py": {
-    "sha256": "28973a69aae48405f6bcfd6906c5fce237d17a06c69f06f5574327c285f0f293",
-    "purpose": "equation and method audit; no new execution"
-  },
-  "case/plant/stage1/s1_cluster.py": {
-    "sha256": "db50f6800547b936c75e54209260055626cdf4ddb4e7b48600c6b14c872189d6",
-    "purpose": "equation and method audit; no new execution"
-  },
-  "case/plant/stage1/s1_paper_inputs.py": {
-    "sha256": "269b3ad3b8665a2faf553d1462a2d82247100ff9ab3fd7192605434566921ed6",
-    "purpose": "equation and method audit; no new execution"
-  },
-  "case/plant/stage1/s1_paper_td.py": {
-    "sha256": "ea2d2ccf4af29d1238edf81ab3beae645c03273d9dadad7183ac23577a4ef738",
-    "purpose": "equation and method audit; no new execution"
-  },
-  "case/plant/results/stage1_paper/p1_candidates/jobshare_0125/td/S1_phase_build__F__phase_paper.npz": {
-    "sha256": "99ddd84b30c6ea6af83ad43c8e3c1e2313b608deb29f7b884e158b599864ca19",
-    "purpose": "saved columns for S1, K=4, role=F"
-  },
-  "case/plant/results/stage1_paper/p1_candidates/jobshare_0125/td/S1_phase_build__K04_1b26ba__phase_paper.npz": {
-    "sha256": "9f7fd369ac1d96e44f3a15c6a75c6e3b7c7a283509f08b5092522a57fa039521",
-    "purpose": "saved columns for S1, K=4, role=param"
-  },
-  "case/plant/results/stage1_paper/p1_candidates/jobshare_0125/td/S1_phase_build__K04_100f4d__phase_paper.npz": {
-    "sha256": "5d6d72d1b552b3e5076690359fa3ceafb73397c0d326e69dc8099fa8d57fffe6",
-    "purpose": "saved columns for S1, K=4, role=resp"
-  },
-  "case/plant/results/stage1_paper/p1_candidates/jobshare_0125/td/S2_phase_build__F__phase_paper.npz": {
-    "sha256": "f820503529447c5ccd2be13d5c9516d8119dde7b6daa9888c7ac80db99320895",
-    "purpose": "saved columns for S2, K=8, role=F"
-  },
-  "case/plant/results/stage1_paper/p1_candidates/jobshare_0125/td/S2_phase_build__K08_f839c1__phase_paper.npz": {
-    "sha256": "8af385e8d794b1cac477d198d718e1e55def7e36feda0d0c0ea6f14dbf9802bc",
-    "purpose": "saved columns for S2, K=8, role=param"
-  },
-  "case/plant/results/stage1_paper/p1_candidates/jobshare_0125/td/S2_phase_build__K08_639145__phase_paper.npz": {
-    "sha256": "66c8d384e58ae93bc9c1951b28495018f8583d47c8a6f41834e99ae7b5ef8a7e",
-    "purpose": "saved columns for S2, K=8, role=resp"
+  "artifacts": {
+    "data/S1_internal.npz": "061de39a3a54a1fa613027d6016e822b8055cb6d9d91b65972922018d0195436",
+    "data/S3_internal.npz": "1eccdb3f8208c5b36dced66dcc756507c2d9b5084208c28b25e4b8138966680e",
+    "data/checks.json": "452c40bb0985670b510b91bfa3fddb0efae8775803ccf0f1810861257c5ad15b",
+    "data/design.json": "cd3dfb2e0d36f62250afea321db3177633ca233b17573976e5d54b6659cff441",
+    "data/full_model_checks.json": "ad1cedd143ffe2370e00dca0a68b72878f3ac6dd77343087d759925e728340b3",
+    "data/grid_parameters.json": "4d4ce7c3cddae986c45e73387ed57536914d00887a6cf03e7dedeb4f7f4027d9",
+    "data/inference_map.json": "c9c4c2b2a41b78d4f8f1ab95b77578d115b6fcd299eeda9ca0bec8b8099ecdfc",
+    "data/operating_points.json": "913d04ce4379d8a184090e4fed2176ba6e06449ee1711b4cec74d54facd3da97",
+    "data/p5_registration.json": "ccdb58ea4fc0dac337435c19a326362f9387c9e8265b76e3de3fe4d10c205550",
+    "data/p5_summary.json": "3b9f2edc0292242a5d52f020d928576ed95e70ead767fdde7a6b5947dc17d57a",
+    "data/scenarios.json": "869e4004cf6833ac6481c433adc565b5439134b48e75fad85bd01a84374ffe6c"
   }
 }

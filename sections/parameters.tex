@@ -1,9 +1,9 @@
 \section{Electrical Parameters and Workload Inputs}
 \subsection{Device design}
-Independent parameter draws describe differences between halls while preserving identical chains inside each hall.
+Independent parameter draws describe differences between halls while preserving identical supply blocks inside each hall.
 A PCG64 generator uses seed 20260919.
 The draw order is section, hall, the nine passive elements, seven controller bandwidths, the PLL filter frequency, feeder length and unit-transformer impedance.
-The numerical ranges are study assumptions, rather than a measured distribution of data-center equipment.
+The numerical ranges are study assumptions.
 
 \begin{table}[H]
 \centering
@@ -22,7 +22,7 @@ PSU capacitance & $c_p$ & 2.0 & 1.8 to 2.2\\
 Server-side capacitance & $c_e$ & 0.2 & 0.18 to 0.22\\\bottomrule
 \end{tabular}
 \end{table}
-All entries are per unit on the chain base.
+All entries are per unit on the block base.
 The voltage references are $v_d^\star=v_u^\star=v_p^\star=1$ and $v_e^\star=0.5$.
 Nominal values originate from \cite{zhao2026dynamic}.
 The VSI voltage-loop bandwidth is 80~Hz in this study, whereas the source Table I uses 100~Hz.
@@ -57,7 +57,8 @@ The data file retains full precision.
 \subsection{Network data}
 The main transformers are each 100~MVA with 8.5\% impedance and assumed $X/R=35$.
 Unit transformers are 3~MVA with a uniformly drawn impedance of 5\% to 6\% and assumed $X/R=6$.
-Their ratings are compatible with the repeated power-block representation discussed in \cite{ross2025emt}; the complete topology is a study configuration.
+Their ratings are compatible with the repeated power-block representation discussed in \cite{ross2025emt}.
+The complete topology is a study configuration.
 
 Each 34.5~kV feeder has a drawn length from 0.2 to 1.5~km.
 Its series impedance is $0.046+\ii0.043$~$\Omega$ per 1000~ft, with capacitive reactance coefficient $0.042$~M$\Omega\cdot1000$~ft.
@@ -77,7 +78,6 @@ The NLR measurements sum graphics processing unit (GPU) board power and central 
 They exclude memory, network cards, fans, storage and power-supply losses.
 The training label denotes Stable Diffusion, fine-tuning denotes Llama-2 70B LoRA, and online inference denotes Llama-3.1 70B serving.
 The training and fine-tuning records use 0.2~s polling and serving uses 0.1~s polling.
-These intervals do not establish sensor bandwidth.
 
 The phase model supplies the fast timing.
 The base frequency is drawn once per task from 0.5 to 1.5~Hz for training or 0.3 to 0.7~Hz for fine-tuning.
@@ -85,7 +85,7 @@ Each iteration has duration $[f_j(1+\xi_i)]^{-1}$ with a zero-mean normal $\xi_i
 Compute shares are uniform from 0.55 to 0.80 for training and 0.70 to 0.90 for fine-tuning.
 Compute-phase level offsets have standard deviations 0.05 and 0.03, respectively.
 Communication-phase drops have means 0.3 and 0.8 with the same respective standard deviations.
-These are the experimental settings of \cite{ko2026oscillations}, not universal workload limits.
+These are the experimental settings of \cite{ko2026oscillations}.
 
 Within-phase standard deviations are drawn once per task.
 Training uses 0.02 to 0.05 in computation and 0.01 to 0.03 in communication.
@@ -93,7 +93,6 @@ Fine-tuning uses 0.01 to 0.03 and 0.005 to 0.02.
 Independent standard normal samples are generated before integration on a 0.01~s grid.
 Linear interpolation between these samples fixes the temporal dependence for every solver evaluation.
 This interpolation is a study assumption.
-It does not turn the NLR records into measured fast task cycles.
 
 The compute power is the median above the midpoint of the fifth and ninety-fifth percentiles of the selected measured window.
 Each node's constructed power is restricted at all input knots to the interval between 418.2~W and the maximum of that measured window.
@@ -104,10 +103,11 @@ Independent jobs use different seeded realizations.
 
 Online inference uses a saturating fit of power against request rate from the two measured serving sweeps.
 Its request rate remains constant in each simulation window.
-Separate requests across replicas do not supply evidence for a common high-frequency inference fluctuation.
+The replicas serve separate request streams, so the power fluctuations of their nodes are independent and largely cancel in the sum over thousands of nodes.
 The exact fit and its source intervals are retained in \path{data/inference_map.json}.
 
-\subsection{Job sizes, allocation and independent inputs}
+\subsection{Job sizes, allocation and realizations}
+\label{sec:allocation}
 Every hall has 2800 node slots.
 The baseline occupancy is drawn uniformly from 0.55 to 0.95 using seed components 20260919 and 1.
 One eighth of the baseline training or fine-tuning slots are retained for synchronous jobs, rounded down within each hall.
@@ -118,16 +118,20 @@ This construction preserves the occupied resource count without adding the GPU o
 The synchronous job size follows a registered screen of the full model.
 The candidate sequence is 1, 0.5, 0.25 and 0.125 of the baseline job slots.
 The selected value is 0.125.
-Selection uses the full plant's response and converter reference levels before equivalent-model errors are evaluated.
-It does not establish a maximum safe job size for a physical facility.
-The supply-chain model contains no active device current, modulation or protection limits.
+Selection uses the response and converter reference levels of the full model and precedes every comparison with the single-block equivalent.
 
 S1 has one training job across all halls.
 S2 has six independently generated training jobs, one per hall pair.
 S3 combines training and fine-tuning with hall-specific resource shares.
 Every scenario also contains online serving.
 Each task is scaled once by its total node count.
-Hall shares are $a_{hj}=m_{hj}/\sum_hm_{hj}$, so their sum is one.
+Hall $h$ hosts $m_{hj}$ nodes of task $j$, and its share of the task is $a_{hj}=m_{hj}/\sum_hm_{hj}$, so the shares of a task sum to one.
+The server power of hall $h$ is
+\begin{equation}
+P_{{\rm IT},h}=P_{{\rm base},h}+\sum_ja_{hj}P_j,
+\end{equation}
+where $P_{{\rm base},h}$ is the power of its idle nodes and $P_j$ is the power of task $j$.
 All inter-hall time offsets are zero.
-The grouping and test inputs use separate random draws and the corresponding source windows.
+Each scenario has two independent realizations, which use separate random draws and separate measured source windows.
+The paper uses the first realization, and Section~\ref{sec:results} reports both.
 The exact seeds, node counts, phase tables, source record identifiers and allocation matrices are stored in \path{data/scenarios.json}.

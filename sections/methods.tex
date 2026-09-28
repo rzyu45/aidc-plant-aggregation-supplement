@@ -1,89 +1,104 @@
-\section{Aggregation and Validation Definitions}
-\subsection{Feature construction}
-A consistent comparison requires both feature sets to use the same grouping inputs and equivalent construction.
-The 19 design features are the nine passive elements, seven bandwidths, PLL filter frequency, feeder length and unit-transformer impedance.
-Mean AC loading supplies the operating-point feature.
-Each feature is standardized by its common mean and standard deviation over all halls and the three grouping operating points.
-The fixed feature vector uses the 19 design features once and the three normalized loading values divided by $\sqrt{3}$.
+\section{Single-Block Equivalent and Analysis Definitions}
+\label{sec:methods}
+\subsection{Single-block equivalent}
+\label{sec:equivalent}
+Grid studies represent a data center plant by one supply block that is driven by the total server power \cite{ross2025emt,arifin2026dynamic}.
+The paper compares this single-block equivalent with the full model of Section~\ref{sec:electrical}.
+The comparison should expose only what the equivalent omits, namely the differences between the blocks and the allocation of the tasks to the halls.
+The equivalent is therefore built from the parameters and the operating point of the full model alone.
 
-For response features, $G_{s,mh}(\ii\omega_k)$ is the full model's response from 1~MW at hall $h$ to output $m$, at grouping operating point $s$.
-The four outputs are PCC active power, reactive power and voltage, and synchronous-machine frequency.
-The 601 logarithmic samples cover 0.1 to 20~Hz.
-Define $w_k=1/(2N_b)$ within band $b$, with the bands 0.1 to 3~Hz and greater than 3 to 20~Hz.
-The common output scale is
-\begin{equation}
-\sigma_m^2=\frac{1}{3H}\sum_{s=1}^{3}\sum_{h=1}^{H}\sum_k w_k|G_{s,mh}(\ii\omega_k)|^2.
-\end{equation}
-For each hall, the real and imaginary parts of $G_{s,mh}\sqrt{w_k/4}/\sigma_m$ are concatenated over frequency and output.
-The three scenario blocks are divided by $\sqrt{3}$ and concatenated.
-This retains relative gain and phase differences without allowing one output's unit to set the distance.
-Test inputs do not enter these scales.
-
-K-means uses Lloyd's algorithm, 20 initializations and random seed 20260919.
-Each medium-voltage section forms $K/2$ groups.
-Cross-section merges are prohibited.
-Tested total group counts are 2, 4, 6, 8, 10 and 12.
-Fixed and per-scenario memberships coincide for this electrical design.
-The exact memberships and feature scales are in \path{data/groups.json}.
-
-\subsection{Physical equivalent}
-Let a group contain units with ratings $S_n$ and weights $w_n=S_n/\sum_n S_n$.
-Its rating is $S_E=\sum_nS_n$ and its terminal demand is the sum of the member demands.
-A capacitance, PI gain or filter cut-off $a$ uses $a_E=\sum_nw_na_n$.
-A series resistance or inductance uses
+Let the plant contain supply blocks with ratings $S_n$ and weights $w_n=S_n/\sum_nS_n$.
+The equivalent block has the rating $S_E=\sum_nS_n$, which is 144~MVA for the 48 blocks of 3~MVA.
+Its server power is the total server power of the plant.
+A capacitance, a PI gain or the PLL low-pass cut-off $a$ uses the capacity-weighted arithmetic mean $a_E=\sum_nw_na_n$.
+A series resistance or inductance uses the capacity-weighted harmonic mean
 \begin{equation}
 a_E=\left(\sum_n\frac{w_n}{a_n}\right)^{-1}.
 \end{equation}
-These rules act on device per-unit values referred to the member ratings.
-For the network branches on the common system base, the equal-loss approximation is
-\begin{equation}
-Z_E=\frac{\sum_n P_n^2Z_n}{(\sum_nP_n)^2}.
-\end{equation}
-The weights $P_n$ are the full model's initial active flows.
-Feeder flows include cooling, whereas unit-transformer flows include only the corresponding IT chain.
-Feeder charging is summed.
-The approximation does not guarantee an exact loss match when voltage magnitudes or power factors differ.
-Its PCC power offset is retained and reported.
+The arithmetic means apply to $c_d$, $c_v$, $c_p$, $c_e$, $\omega_{\rm lp}$ and the 14 PI gains, and the harmonic means apply to $r_a$, $\ell_a$, $r_v$, $\ell_v$ and $r_p$.
+The PI gains are averaged directly and are not recomputed from the averaged elements.
+The reference values and $\omega_s$ are equal in all blocks and keep their values.
+These rules act on device per-unit values, each referred to the rating of its own block.
+All blocks of the plant have the same rating, so every weight equals 1/48.
 
-Four identical chains in one hall reduce exactly to a chain on their summed rating under equal inputs and consistent initial states.
-The common feeder is unchanged and the four unit transformers form their exact parallel equivalent.
-Cross-hall aggregation is approximate because device parameters and individual task disturbances differ.
-The main transformers and both medium-voltage buses are retained.
+The equivalent keeps one path from the PCC to its block.
+The two main transformers, the 12 feeders and the 48 unit transformers each become one branch with the equal-loss impedance
+\begin{equation}
+Z_E=\frac{\sum_nP_n^2Z_n}{\left(\sum_nP_n\right)^2},
+\end{equation}
+where $Z_n$ are the member impedances on the system base and $P_n$ are their initial active flows in the full model.
+A feeder flow includes the cooling load behind it, whereas a unit-transformer flow includes only its supply block.
+The feeder charging susceptances are summed.
+The two medium-voltage buses become one bus, and the 12 hall buses and the 48 low-voltage buses each become one bus.
+The equal-loss impedance reproduces the branch losses at the operating point when all members share one voltage magnitude and one power factor.
+The remaining offset of the initial PCC power is retained and reported in Section~\ref{sec:time}.
+
+The cooling loads of the 12 halls become one constant-power load at the hall bus of the equivalent.
+The two auxiliary loads become one constant-impedance load at its medium-voltage bus.
+The residual load at bus~8 is that of the full model.
+
+The input of the equivalent is the total server power $P_{\rm IT}=\sum_hP_{{\rm IT},h}$.
+A server power in any hall therefore enters the one block in the same way.
+Let $g_h$ be the response of the full model to 1~MW of server power in hall $h$, and let $\bar g$ be the response of the equivalent to the same input, which does not depend on $h$.
+The full model responds to task $j$ with $\sum_ha_{hj}g_h$, whereas the equivalent responds with $\bar g$ because $\sum_ha_{hj}=1$.
+The difference for task $j$ is
+\begin{equation}
+e_j=\sum_ha_{hj}\left(\bar g-g_h\right).
+\label{eq:task-error}
+\end{equation}
+
+A positive control checks the construction.
+It gives every hall the nominal design, identical feeders and unit transformers and a server power of 6~MW.
+Every merged element then equals the parallel combination of identical members, so the equivalent must reproduce the full model.
+Over 51 frequencies of the grid of Section~\ref{sec:small-signal}, the relative difference between the responses of the two models to the hall server powers is at most $1.0\cdot10^{-12}$.
+The relative difference is the norm of the response difference over the frequencies and the halls divided by the norm of the full-model response, maximized over the four outputs.
 
 \subsection{Small-signal and modal quantities}
+\label{sec:small-signal}
 Linearization of $\dot x=f(x,z,u)$ and $0=g(x,z)$ gives a state matrix after removal of the common angle reference and elimination of the nonsingular algebraic block.
 With derivatives at the operating point,
 \begin{equation}
 A=f_x-f_zg_z^{-1}g_x,\qquad B=f_u-f_zg_z^{-1}g_u,\qquad G(s)=C(sI-A)^{-1}B+D.
 \end{equation}
 The output derivatives include the corresponding elimination of $z$.
-Input enters the device equations through the terminal-demand command.
-The task response is $G(s)B_c$.
+The operating point is the equilibrium under the mean server power of every hall over the 60~s window of the realization.
+The inputs $u$ are the server powers of the halls, which enter the device equations through the commands $p_{\rm load}$ of their blocks.
+The four outputs are the PCC active power, reactive power and voltage and the speed of the synchronous machine at bus~1, expressed as a frequency in Hz.
+Column $h$ of $G(s)$ is $g_h$, and the task response is $G(s)B_c$ with the allocation matrix $B_c=[a_{hj}]$.
 
-Repeated modes use an invariant-subspace projector $\Pi_c=V_c(W_c^{\mathsf H}V_c)^{-1}W_c^{\mathsf H}$.
-For a repeated eigenvalue $\lambda_c$, the cluster residue is $C\Pi_cB$.
+The identical blocks of a hall give repeated eigenvalues.
+Eigenvalues closer than $10^{-6}(1+|\lambda|)$ are treated as one repeated eigenvalue.
+Repeated modes therefore use an invariant-subspace projector $\Pi_c=V_c(W_c^{\mathsf H}V_c)^{-1}W_c^{\mathsf H}$.
+For a repeated eigenvalue $\lambda_c$, the residue of its invariant subspace is $C\Pi_cB$.
 Its task-to-output residue follows after multiplication by $B_c$.
-The contribution measure is the residue magnitude divided by $|\operatorname{Re}\lambda_c|$.
-For the modal scatter plot, marker area uses the largest contribution over all tasks of that model.
-The highlighted job's transfer curve is evaluated separately.
-This avoids interpreting the scatter as a job-specific mode filter.
+The contribution of a mode to a task is the magnitude of its active-power residue divided by $|\operatorname{Re}\lambda_c|$.
+A mode counts once regardless of its multiplicity.
+An oscillatory mode has a positive imaginary part and a damping ratio below 0.9.
+The mode counts of Section~\ref{sec:results} and of Fig.~3(a) of the paper include the oscillatory modes between 3 and 20~Hz whose largest contribution over the tasks reaches 10\% of the largest such contribution of the full model.
+In Fig.~3(a) of the paper, the marker area grows with this largest contribution.
 
-The main comparison uses the worst task's normalized complex response error in a band $\mathcal B$,
+The band error measures how closely the equivalent follows the full model in a frequency band.
+For output $m$, task $j$ and band $\mathcal B$, it is
 \begin{equation}
-\epsilon_{\mathcal B}=\max_j\left[\frac{\sum_{k\in\mathcal B}|G_{E,j}(\ii\omega_k)-G_{F,j}(\ii\omega_k)|^2}{\sum_{k\in\mathcal B}|G_{F,j}(\ii\omega_k)|^2}\right]^{1/2}.
+\epsilon_{mj,\mathcal B}=\left[\frac{\sum_{k\in\mathcal B}|G_{E,mj}(\ii\omega_k)-G_{F,mj}(\ii\omega_k)|^2}{\sum_{k\in\mathcal B}|G_{F,mj}(\ii\omega_k)|^2}\right]^{1/2},
 \end{equation}
-The sums weight the saved logarithmic grid points equally.
-The worst task is selected separately for each output and model.
-The main 5\% criterion applies to PCC active power in the upper band at both grouping and test operating points.
-It is a study criterion and does not certify the other outputs.
-Peak-gain and peak-frequency deviations use each model's refined peak.
-Phase difference uses the full model's peak grid frequency for both models.
-These distinct definitions explain why matching a peak gain can coexist with a large complex band error.
+where $G_{F,mj}$ and $G_{E,mj}$ are the task responses of the full model and of the equivalent.
+The grid has 601 logarithmically spaced frequencies from 0.1 to 20~Hz, and the sums weight its points equally.
+The low band contains the grid points from 0.1 to 3~Hz, and the resonance band contains the points above 3~Hz up to 20~Hz.
+The largest band error of a realization is the maximum over its training and fine-tuning jobs.
 
-\clearpage
-\subsection{Local supply-chain modes and network coupling}
+Two limiting allocations show how the band error depends on the allocation.
+The single-hall band error of hall $h$ uses $g_h$ and $\bar g$ in place of the task responses, which describes a unit input in hall $h$ alone.
+The uniform-input band error uses $\frac1H\sum_hg_h$ and $\bar g$, which describes the same unit input spread evenly over the $H=12$ halls.
+Both use the PCC active power and the resonance band.
+
+The peak gain and the peak frequency of each model come from a bounded one-dimensional search between the two grid neighbors of the largest grid value of its active-power gain.
+The phase difference is $\arg[G_{E,Pj}(\ii\omega_p)/G_{F,Pj}(\ii\omega_p)]$, evaluated at the grid frequency $\omega_p$ of the largest gain of the full model.
+The band error also contains phase differences, so a close peak gain can coexist with a large band error.
+
+\subsection{Local supply-block modes and network coupling}
 The origin of a resonant response must be distinguished from its transmission to the PCC.
-The supply-chain equations reproduced from \cite{zhao2026dynamic} use unlimited modulation, a fixed VSI reference frequency $\omega_s$ and prescribed terminal demand.
+The supply-block equations reproduced from \cite{zhao2026dynamic} use unlimited modulation, a fixed VSI reference frequency $\omega_s$ and a prescribed server power.
 Let $\bm v_c^\star$ denote the numerator of \eqref{eq:vsi-modulation}.
 Substitution into the VSI current equation \eqref{eq:vsi-current} gives
 \begin{equation}
@@ -91,50 +106,53 @@ v_d\bm m_v=\bm v_c^\star,\qquad v_d\ne0.
 \end{equation}
 The command $\bm v_c^\star$ depends only on local VSI states and fixed references.
 The DC-link voltage therefore cancels from the VSI state equations.
-The eight VSI states, two PSU states and two server DC--DC states form a local 12-state subsystem driven by its own terminal-demand command.
+The eight VSI states, two PSU states and two server DC--DC states form a local 12-state subsystem driven by its own command $p_{\rm load}$.
 Network voltage and AFE states do not enter these equations.
 
 This dependence determines how the local modes enter the plant model.
-For $N$ supply chains, let $x_L$ collect their local states and let $x_N$ collect the remaining AFE, DC-link and external-grid states.
+For $N$ supply blocks, let $x_L$ collect their local states and let $x_N$ collect the remaining AFE, DC-link and external-grid states.
 After elimination of the network algebraic variables, ordering the states as $x_L,x_N$ gives
 \begin{equation}
 A=\begin{bmatrix}A_L&0\\A_{NL}&A_N\end{bmatrix},\qquad
 A_L=\operatorname{diag}(A_{L,1},\ldots,A_{L,N}),
 \end{equation}
-where each $A_{L,n}$ is the 12-state matrix of one supply chain.
+where each $A_{L,n}$ is the 12-state matrix of one supply block.
 For fixed local operating points and parameters, its eigenvalues do not depend on $A_N$.
 Local state disturbances can drive the AFE and DC-link states through $A_{NL}$ and appear at the PCC.
 Network coupling remains in $A_N$ and affects the upstream responses.
-Thus, a local VSI--PSU mode can appear in several grid-connected quantities without being generated by feedback between supply units.
+Thus, a local VSI--PSU mode can appear in several grid-connected quantities without being generated by feedback between supply blocks.
 Signed sums of spectral-projector entries are not energy fractions.
 
-The aggregation and task-allocation comparisons assess task-to-PCC accuracy.
+The comparisons of the paper and of Section~\ref{sec:results} assess task-to-PCC accuracy.
 They do not include a controlled removal or variation of network feedback.
-They therefore do not isolate inter-unit network coupling as the cause of the dominant resonances or aggregation errors.
+They therefore do not isolate inter-block network coupling as the cause of the dominant resonances or of the differences between the full model and the single-block equivalent.
 This structural interpretation applies to the stated unlimited, fixed-frequency model.
 
-\subsection{Time integration and timing}
+\subsection{Time integration and internal variables}
+\label{sec:time-methods}
 Every model receives the same stored input realization.
 A one-second rest precedes the 60-second task window.
+Each run starts from the equilibrium of its model at the server power of the first input instant.
 Every phase transition appears in the scheduled-event calendar.
 The integrator stops at the event, installs the next continuous segment, solves consistent algebraic initial values and resumes.
 A finite-width ramp is not substituted for a phase transition.
 
-The production calculation uses Solverz Rodas with KLU, JIT-compiled modules, relative tolerance $10^{-4}$, absolute tolerance $10^{-6}$, maximum step 0.01~s and output spacing 0.0025~s.
+The production calculation uses Solverz Rodas with KLU, just-in-time compiled modules, relative tolerance $10^{-4}$, absolute tolerance $10^{-6}$, maximum step 0.01~s and output spacing 0.0025~s.
 Consistent initialization uses tolerance $10^{-6}$.
 Model checks require equal equation and variable counts and initial residual below $10^{-10}$.
-Strict comparisons use relative tolerance $10^{-8}$ and absolute tolerance $10^{-10}$.
-The exact 12-group control also uses a paired rerun at relative tolerance $10^{-6}$ to resolve errors near the production tolerance.
+The strict comparison repeats both models at relative tolerance $10^{-8}$ and absolute tolerance $10^{-10}$.
 
 For output $y$, set $d_F(t)=y_F(t)-y_F(0)$ and $d_E(t)=y_E(t)-y_E(0)$.
 Over the task window, the dynamic error is $\operatorname{RMS}(d_E-d_F)/\operatorname{RMS}(d_F)$.
-Initial offset $y_E(0)-y_F(0)$, absolute RMS error and maximum dynamic error are separate quantities.
-Raw plots retain the initial offsets.
-Internal voltage comparisons map a full-model chain to the equivalent containing that chain's hall; they assess a local-state approximation, not an additional PCC measurement.
+The initial offset $b_0=y_E(0)-y_F(0)$ is reported separately.
+The spectral share of the active-power error comes from a periodogram of $d_E-d_F$ over the task window with the mean removed and one Hann window.
+The share between 3 and 9~Hz covers the frequencies above 3~Hz up to 9~Hz.
 
-Integration timing runs serially.
-Each model is built once and warmed up once.
-Three subsequent rounds rotate the model order and report the median and range.
-The recording function retains PCC active power.
-Model building and response calculations are excluded from these integration times.
-These are implementation-specific costs rather than estimates from state count.
+The internal-variable comparison repeats the production runs of both models under the three inputs of the realization used in the paper.
+It records the first supply block of every hall of the full model and the one block of the equivalent.
+The four blocks of a hall share their input, parameters and initial state, so the first block represents the hall.
+The recorded block variables are $v_d$, the magnitude $|\bm v_v|$ of the VSI output voltage, $v_p$, $v_e$ and the magnitude $|\bm i_a|$ of the AFE current, in per unit on the block base.
+The server power $P_{{\rm IT},h}$ and the AC input power $P_{{\rm AC},h}$ of hall $h$ are sums over its four blocks.
+The peak deviation of a variable is its largest absolute change from the initial value over the task window.
+The ratio divides the peak deviation of the equivalent by the largest peak deviation among the halls of the full model.
+For the equivalent, the server power and the AC input power are plant totals, so these two quantities have no ratio.

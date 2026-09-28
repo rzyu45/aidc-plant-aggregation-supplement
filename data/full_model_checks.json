@@ -1,0 +1,675 @@
+{
+  "note": "checks of the full plant model F, extracted without change from the saved P2 and P3 summaries; F: per input, states, variables, initial residual, zero modes, largest real part of the remaining eigenvalues, stability, modal reconstruction and task-to-PCC peaks; gates: per input of the realization used in the paper, equation and variable counts, initial residual, server power and a 2 s run without input; screen_F: per input, the ranges of the DC-link voltage, the largest converter current and the largest ratio of a modulation index to its operating-point value during the task-driven run",
+  "sources": {
+    "case/plant/results/stage1_paper/p1_candidates/jobshare_0125/p2_summary.json": {
+      "sha256": "1676f52a470cc27dbe5ba49a38fa05e59464c1ffe5ad7da11f2cee19a0fef99e",
+      "blocks": [
+        "F",
+        "gates"
+      ]
+    },
+    "case/plant/results/stage1_paper/p1_candidates/jobshare_0125/p3_summary.json": {
+      "sha256": "9fa5e8ebbdf1ab2b9c387122ec50896aa6f14de6ab925ab5f2c74a385530a03b",
+      "blocks": [
+        "screen_F"
+      ]
+    }
+  },
+  "F": {
+    "S1_phase_build": {
+      "n_states": 1045,
+      "vsize": 1873,
+      "residual": 5.786582476898671e-12,
+      "zero_modes": 1,
+      "max_real": -0.1169946183896468,
+      "stable": true,
+      "g5": 3.052425116407995e-11,
+      "g5_passed": true,
+      "initial": {
+        "P_MW": 88.48775593539197,
+        "Q_Mvar": 4.236387646576717,
+        "V_pu": 1.0128032301216046,
+        "f_Hz": 60.0
+      },
+      "n_clusters": 397,
+      "max_cluster": 4,
+      "max_cond": 10.774383174207726,
+      "peaks": {
+        "train": {
+          "kind": "train",
+          "f_hz": 5.331468356495042,
+          "gain": 1.9042846281552883,
+          "at_band_edge": false,
+          "dc_gain": 1.0218591972509192,
+          "f_grid_hz": 5.318295896944989,
+          "gain_grid": 1.9042660738951986,
+          "phase_deg_at_grid_peak": -78.98001432793993,
+          "phase_deg_at_0p1_hz": -0.18404234875328823,
+          "vdc_gain_max_pu_per_mw": 0.05805368463957738
+        },
+        "infer": {
+          "kind": "infer",
+          "f_hz": 5.331359080738974,
+          "gain": 1.9043315793224345,
+          "at_band_edge": false,
+          "dc_gain": 1.0218594662260427,
+          "f_grid_hz": 5.318295896944989,
+          "gain_grid": 1.9043133301361144,
+          "phase_deg_at_grid_peak": -78.981972257895,
+          "phase_deg_at_0p1_hz": -0.18402640670098186,
+          "vdc_gain_max_pu_per_mw": 0.0580873429555389
+        }
+      },
+      "t_build": 89.75766203703824,
+      "t_response": 26.285643683979288,
+      "t_modal": 0.5116892489604652,
+      "v_lv": [
+        1.0025805048025442,
+        1.0059371234213899
+      ],
+      "i_ac_max": 0.6346109733994234
+    },
+    "S1_phase_test": {
+      "n_states": 1045,
+      "vsize": 1873,
+      "residual": 5.041101050903105e-12,
+      "zero_modes": 1,
+      "max_real": -0.11696884451730283,
+      "stable": true,
+      "g5": 8.37506430132973e-12,
+      "g5_passed": true,
+      "initial": {
+        "P_MW": 86.3845408744036,
+        "Q_Mvar": 3.9811912189276035,
+        "V_pu": 1.012988761683644,
+        "f_Hz": 60.0
+      },
+      "n_clusters": 397,
+      "max_cluster": 4,
+      "max_cond": 28.728111131786015,
+      "peaks": {
+        "train": {
+          "kind": "train",
+          "f_hz": 5.307385128316848,
+          "gain": 1.8912932093111197,
+          "at_band_edge": false,
+          "dc_gain": 1.0213421878350255,
+          "f_grid_hz": 5.318295896944989,
+          "gain_grid": 1.8912806575567394,
+          "phase_deg_at_grid_peak": -78.62838624124787,
+          "phase_deg_at_0p1_hz": -0.1802706570032169,
+          "vdc_gain_max_pu_per_mw": 0.057347945974679584
+        },
+        "infer": {
+          "kind": "infer",
+          "f_hz": 5.307275951761418,
+          "gain": 1.8913379918715112,
+          "at_band_edge": false,
+          "dc_gain": 1.0213424471942565,
+          "f_grid_hz": 5.318295896944989,
+          "gain_grid": 1.8913251866808525,
+          "phase_deg_at_grid_peak": -78.63033083503208,
+          "phase_deg_at_0p1_hz": -0.18025507906391827,
+          "vdc_gain_max_pu_per_mw": 0.05738128160193698
+        }
+      },
+      "t_build": 90.22170423204079,
+      "t_response": 26.74676929891575,
+      "t_modal": 0.30985041498206556,
+      "v_lv": [
+        1.0030936893675377,
+        1.0063331000617555
+      ],
+      "i_ac_max": 0.618568213638121
+    },
+    "S2_phase_build": {
+      "n_states": 1045,
+      "vsize": 1873,
+      "residual": 4.739738282053521e-12,
+      "zero_modes": 1,
+      "max_real": -0.11699407848864651,
+      "stable": true,
+      "g5": 1.710835904564146e-11,
+      "g5_passed": true,
+      "initial": {
+        "P_MW": 88.44445963370545,
+        "Q_Mvar": 4.231044221911449,
+        "V_pu": 1.0128071150896247,
+        "f_Hz": 60.0
+      },
+      "n_clusters": 397,
+      "max_cluster": 4,
+      "max_cond": 27.17000101969667,
+      "peaks": {
+        "job1": {
+          "kind": "train",
+          "f_hz": 4.8262818936075,
+          "gain": 1.8722964087003264,
+          "at_band_edge": false,
+          "dc_gain": 1.0254746915827344,
+          "f_grid_hz": 4.825995880177925,
+          "gain_grid": 1.8722963977626763,
+          "phase_deg_at_grid_peak": -78.03938607069009,
+          "phase_deg_at_0p1_hz": -0.2304676205622312,
+          "vdc_gain_max_pu_per_mw": 0.2773170051384341
+        },
+        "job2": {
+          "kind": "train",
+          "f_hz": 6.242915882829449,
+          "gain": 2.1432009020663005,
+          "at_band_edge": false,
+          "dc_gain": 1.0209819616016758,
+          "f_grid_hz": 6.234525371093254,
+          "gain_grid": 2.1431920935844473,
+          "phase_deg_at_grid_peak": -87.26346511055006,
+          "phase_deg_at_0p1_hz": -0.0994855079053775,
+          "vdc_gain_max_pu_per_mw": 0.2548674648839456
+        },
+        "job3": {
+          "kind": "train",
+          "f_hz": 6.016793696985991,
+          "gain": 2.173732541328024,
+          "at_band_edge": false,
+          "dc_gain": 1.0221675131707637,
+          "f_grid_hz": 6.01815261196724,
+          "gain_grid": 2.1737322896292137,
+          "phase_deg_at_grid_peak": -95.25696379806739,
+          "phase_deg_at_0p1_hz": -0.239406890215406,
+          "vdc_gain_max_pu_per_mw": 0.25730716863851916
+        },
+        "job4": {
+          "kind": "train",
+          "f_hz": 5.012100955828154,
+          "gain": 1.9007309154216074,
+          "at_band_edge": false,
+          "dc_gain": 1.0233861086847038,
+          "f_grid_hz": 4.999506608710869,
+          "gain_grid": 1.900708230603916,
+          "phase_deg_at_grid_peak": -80.63468514799833,
+          "phase_deg_at_0p1_hz": -0.22802763294822329,
+          "vdc_gain_max_pu_per_mw": 0.2600525343682703
+        },
+        "job5": {
+          "kind": "train",
+          "f_hz": 5.092097814517733,
+          "gain": 1.8761770770256974,
+          "at_band_edge": false,
+          "dc_gain": 1.018715876883077,
+          "f_grid_hz": 5.0885875002876135,
+          "gain_grid": 1.876175503249828,
+          "phase_deg_at_grid_peak": -70.66693617895632,
+          "phase_deg_at_0p1_hz": -0.15546942782963202,
+          "vdc_gain_max_pu_per_mw": 0.19270163489414305
+        },
+        "job6": {
+          "kind": "train",
+          "f_hz": 5.501370102665792,
+          "gain": 1.8710775527896646,
+          "at_band_edge": false,
+          "dc_gain": 1.018842660738274,
+          "f_grid_hz": 5.509506461260405,
+          "gain_grid": 1.8710705262072727,
+          "phase_deg_at_grid_peak": -78.24243888692246,
+          "phase_deg_at_0p1_hz": -0.12599918367128995,
+          "vdc_gain_max_pu_per_mw": 0.25327642634232234
+        },
+        "infer": {
+          "kind": "infer",
+          "f_hz": 5.330812567129028,
+          "gain": 1.9040628755794984,
+          "at_band_edge": false,
+          "dc_gain": 1.021848870815834,
+          "f_grid_hz": 5.318295896944989,
+          "gain_grid": 1.9040461250696925,
+          "phase_deg_at_grid_peak": -78.97589596967279,
+          "phase_deg_at_0p1_hz": -0.18395859841086615,
+          "vdc_gain_max_pu_per_mw": 0.05807102992549032
+        }
+      },
+      "t_build": 89.97202350699808,
+      "t_response": 29.973134557018057,
+      "t_modal": 0.30750423192512244,
+      "v_lv": [
+        1.002592131222854,
+        1.0059450136601484
+      ],
+      "i_ac_max": 0.634245338389707
+    },
+    "S2_phase_test": {
+      "n_states": 1045,
+      "vsize": 1873,
+      "residual": 3.235901442594551e-12,
+      "zero_modes": 1,
+      "max_real": -0.11696799995192095,
+      "stable": true,
+      "g5": 2.3393644832010533e-11,
+      "g5_passed": true,
+      "initial": {
+        "P_MW": 86.31423684661812,
+        "Q_Mvar": 3.97282549572584,
+        "V_pu": 1.0129948428989322,
+        "f_Hz": 60.0
+      },
+      "n_clusters": 397,
+      "max_cluster": 4,
+      "max_cond": 97.15744454054992,
+      "peaks": {
+        "job1": {
+          "kind": "train",
+          "f_hz": 4.802658132701734,
+          "gain": 1.8588624244246188,
+          "at_band_edge": false,
+          "dc_gain": 1.0248531010829312,
+          "f_grid_hz": 4.783567392574997,
+          "gain_grid": 1.8588149927738056,
+          "phase_deg_at_grid_peak": -76.43430963675692,
+          "phase_deg_at_0p1_hz": -0.2255261884645584,
+          "vdc_gain_max_pu_per_mw": 0.27445809942623034
+        },
+        "job2": {
+          "kind": "train",
+          "f_hz": 6.204912257434059,
+          "gain": 2.1203582883269756,
+          "at_band_edge": false,
+          "dc_gain": 1.0205039950239676,
+          "f_grid_hz": 6.179713579084883,
+          "gain_grid": 2.120281053125661,
+          "phase_deg_at_grid_peak": -85.48914351266478,
+          "phase_deg_at_0p1_hz": -0.09786957208031252,
+          "vdc_gain_max_pu_per_mw": 0.2511932877822731
+        },
+        "job3": {
+          "kind": "train",
+          "f_hz": 5.970831854856351,
+          "gain": 2.146916423189392,
+          "at_band_edge": false,
+          "dc_gain": 1.0216095315774132,
+          "f_grid_hz": 5.965243094464716,
+          "gain_grid": 2.146912269484181,
+          "phase_deg_at_grid_peak": -93.20979652253357,
+          "phase_deg_at_0p1_hz": -0.23399369313864576,
+          "vdc_gain_max_pu_per_mw": 0.252530319667453
+        },
+        "job4": {
+          "kind": "train",
+          "f_hz": 4.987866877430533,
+          "gain": 1.8859490671209411,
+          "at_band_edge": false,
+          "dc_gain": 1.0228132455982082,
+          "f_grid_hz": 4.999506608710869,
+          "gain_grid": 1.8859302277960694,
+          "phase_deg_at_grid_peak": -80.2430204953423,
+          "phase_deg_at_0p1_hz": -0.22297466984717487,
+          "vdc_gain_max_pu_per_mw": 0.25866080962566795
+        },
+        "job5": {
+          "kind": "train",
+          "f_hz": 5.076680937385064,
+          "gain": 1.867154267723255,
+          "at_band_edge": false,
+          "dc_gain": 1.0182849808423777,
+          "f_grid_hz": 5.0885875002876135,
+          "gain_grid": 1.867136380877496,
+          "phase_deg_at_grid_peak": -70.37490443364182,
+          "phase_deg_at_0p1_hz": -0.15246241083972117,
+          "vdc_gain_max_pu_per_mw": 0.1914738358755624
+        },
+        "job6": {
+          "kind": "train",
+          "f_hz": 5.476362524072643,
+          "gain": 1.8598244440672367,
+          "at_band_edge": false,
+          "dc_gain": 1.0184056634459626,
+          "f_grid_hz": 5.461068784893963,
+          "gain_grid": 1.8597999685402022,
+          "phase_deg_at_grid_peak": -76.7292434665834,
+          "phase_deg_at_0p1_hz": -0.12362822589217909,
+          "vdc_gain_max_pu_per_mw": 0.2521444568040039
+        },
+        "infer": {
+          "kind": "infer",
+          "f_hz": 5.306267747162487,
+          "gain": 1.8908799825733222,
+          "at_band_edge": false,
+          "dc_gain": 1.021325280694802,
+          "f_grid_hz": 5.318295896944989,
+          "gain_grid": 1.8908647321685617,
+          "phase_deg_at_grid_peak": -78.61864876126398,
+          "phase_deg_at_0p1_hz": -0.18011673043125764,
+          "vdc_gain_max_pu_per_mw": 0.057366270070908554
+        }
+      },
+      "t_build": 88.88197403796948,
+      "t_response": 29.892789506004192,
+      "t_modal": 0.335834615980275,
+      "v_lv": [
+        1.0031078352619816,
+        1.0063448224071705
+      ],
+      "i_ac_max": 0.6182409574804573
+    },
+    "S3_phase_build": {
+      "n_states": 1045,
+      "vsize": 1873,
+      "residual": 4.573463968320561e-12,
+      "zero_modes": 1,
+      "max_real": -0.11699578951370325,
+      "stable": true,
+      "g5": 1.9982213217198577e-11,
+      "g5_passed": true,
+      "initial": {
+        "P_MW": 88.58161108428578,
+        "Q_Mvar": 4.247973752067574,
+        "V_pu": 1.0127948024769602,
+        "f_Hz": 60.0
+      },
+      "n_clusters": 397,
+      "max_cluster": 4,
+      "max_cond": 69.67416061206737,
+      "peaks": {
+        "train": {
+          "kind": "train",
+          "f_hz": 5.191051905527595,
+          "gain": 1.8928647994217014,
+          "at_band_edge": false,
+          "dc_gain": 1.0218280435502671,
+          "f_grid_hz": 5.179255629539027,
+          "gain_grid": 1.8928490885833609,
+          "phase_deg_at_grid_peak": -77.5835206787758,
+          "phase_deg_at_0p1_hz": -0.18505194908117914,
+          "vdc_gain_max_pu_per_mw": 0.1031330178749388
+        },
+        "tune": {
+          "kind": "tune",
+          "f_hz": 5.331721988364602,
+          "gain": 1.9182331832505897,
+          "at_band_edge": false,
+          "dc_gain": 1.0216437829533553,
+          "f_grid_hz": 5.318295896944989,
+          "gain_grid": 1.9182131253240333,
+          "phase_deg_at_grid_peak": -78.48929299790639,
+          "phase_deg_at_0p1_hz": -0.17621904253367368,
+          "vdc_gain_max_pu_per_mw": 0.07040555838782088
+        },
+        "infer": {
+          "kind": "infer",
+          "f_hz": 5.340094829625295,
+          "gain": 1.9049350261820663,
+          "at_band_edge": false,
+          "dc_gain": 1.0218975693625267,
+          "f_grid_hz": 5.318295896944989,
+          "gain_grid": 1.9048844524841853,
+          "phase_deg_at_grid_peak": -78.90987627810492,
+          "phase_deg_at_0p1_hz": -0.18456076301714477,
+          "vdc_gain_max_pu_per_mw": 0.0570481243640361
+        }
+      },
+      "t_build": 90.19396547798533,
+      "t_response": 27.529256356996484,
+      "t_modal": 0.3043437860906124,
+      "v_lv": [
+        1.0025682495295662,
+        1.0059125387965473
+      ],
+      "i_ac_max": 0.6345824044693323
+    },
+    "S3_phase_test": {
+      "n_states": 1045,
+      "vsize": 1873,
+      "residual": 4.610774411765036e-12,
+      "zero_modes": 1,
+      "max_real": -0.11696807960939934,
+      "stable": true,
+      "g5": 2.239482727731431e-11,
+      "g5_passed": true,
+      "initial": {
+        "P_MW": 86.32052487293558,
+        "Q_Mvar": 3.9736148900540016,
+        "V_pu": 1.0129942666464358,
+        "f_Hz": 60.0
+      },
+      "n_clusters": 397,
+      "max_cluster": 4,
+      "max_cond": 20.877291506892497,
+      "peaks": {
+        "train": {
+          "kind": "train",
+          "f_hz": 5.167231492050758,
+          "gain": 1.87946458372771,
+          "at_band_edge": false,
+          "dc_gain": 1.0212801237897184,
+          "f_grid_hz": 5.179255629539027,
+          "gain_grid": 1.8794485527062077,
+          "phase_deg_at_grid_peak": -77.21408403995031,
+          "phase_deg_at_0p1_hz": -0.18105001226335937,
+          "vdc_gain_max_pu_per_mw": 0.10194696809646349
+        },
+        "tune": {
+          "kind": "tune",
+          "f_hz": 5.306683658830999,
+          "gain": 1.9037783291412715,
+          "at_band_edge": false,
+          "dc_gain": 1.021095238527813,
+          "f_grid_hz": 5.318295896944989,
+          "gain_grid": 1.9037635780495648,
+          "phase_deg_at_grid_peak": -78.11480229540621,
+          "phase_deg_at_0p1_hz": -0.1723636311170243,
+          "vdc_gain_max_pu_per_mw": 0.06976653520979217
+        },
+        "infer": {
+          "kind": "infer",
+          "f_hz": 5.313644672216053,
+          "gain": 1.8909691945600087,
+          "at_band_edge": false,
+          "dc_gain": 1.0213406064890385,
+          "f_grid_hz": 5.318295896944989,
+          "gain_grid": 1.8909669246630463,
+          "phase_deg_at_grid_peak": -78.53580048476195,
+          "phase_deg_at_0p1_hz": -0.18048661008428174,
+          "vdc_gain_max_pu_per_mw": 0.05632556148131414
+        }
+      },
+      "t_build": 90.29093184601516,
+      "t_response": 27.03181839908939,
+      "t_modal": 0.3552930409787223,
+      "v_lv": [
+        1.0031108228523176,
+        1.0063388745991482
+      ],
+      "i_ac_max": 0.6179829091867375
+    }
+  },
+  "gates": {
+    "S1_phase_build": {
+      "key": "S1_phase_build__F__gate",
+      "status": "complete",
+      "input": "S1_phase_build",
+      "eqn_size": 1873,
+      "vsize": 1873,
+      "residual": 5.786582476898671e-12,
+      "terminal_mw": 72.88570953565943,
+      "terminal_target_mw": 72.88570953565862,
+      "terminal_error_mw": 8.100187187665142e-13,
+      "pf_demand_total_mw": 314.99999999999994,
+      "equations_equal_variables": true,
+      "residual_below_1e_10": true,
+      "site_mean_of_scenario_mw": 72.8857095356586,
+      "terminal_matches_scenario": true,
+      "pf_demand_is_315_mw": true,
+      "flat_run": {
+        "t_end": 2.0,
+        "max_drift": 3.5071251458518304e-13,
+        "passed": true,
+        "wall_s": 0.5878260619938374
+      },
+      "wall_s": 90.42461769504007,
+      "passed": true
+    },
+    "S2_phase_build": {
+      "key": "S2_phase_build__F__gate",
+      "status": "complete",
+      "input": "S2_phase_build",
+      "eqn_size": 1873,
+      "vsize": 1873,
+      "residual": 4.739738282053521e-12,
+      "terminal_mw": 72.85045140968221,
+      "terminal_target_mw": 72.85045140968111,
+      "terminal_error_mw": 1.0942358130705543e-12,
+      "pf_demand_total_mw": 314.99999999999994,
+      "equations_equal_variables": true,
+      "residual_below_1e_10": true,
+      "site_mean_of_scenario_mw": 72.85045140968117,
+      "terminal_matches_scenario": true,
+      "pf_demand_is_315_mw": true,
+      "flat_run": {
+        "t_end": 2.0,
+        "max_drift": 4.01727262566709e-13,
+        "passed": true,
+        "wall_s": 0.4441219619475305
+      },
+      "wall_s": 86.30143496801611,
+      "passed": true
+    },
+    "S3_phase_build": {
+      "key": "S3_phase_build__F__gate",
+      "status": "complete",
+      "input": "S3_phase_build",
+      "eqn_size": 1873,
+      "vsize": 1873,
+      "residual": 4.573463968320561e-12,
+      "terminal_mw": 72.96203898101746,
+      "terminal_target_mw": 72.9620389810178,
+      "terminal_error_mw": 3.410605131648481e-13,
+      "pf_demand_total_mw": 315.0,
+      "equations_equal_variables": true,
+      "residual_below_1e_10": true,
+      "site_mean_of_scenario_mw": 72.96203898101784,
+      "terminal_matches_scenario": true,
+      "pf_demand_is_315_mw": true,
+      "flat_run": {
+        "t_end": 2.0,
+        "max_drift": 4.4936623866398406e-13,
+        "passed": true,
+        "wall_s": 0.43921228405088186
+      },
+      "wall_s": 80.12332080397755,
+      "passed": true
+    }
+  },
+  "screen_F": {
+    "S1_phase_build": {
+      "status": "complete",
+      "error": null,
+      "t_reached": 61.0,
+      "v_dc": [
+        0.8841445892536142,
+        1.1128794913774258
+      ],
+      "i_max": 0.6885418754970408,
+      "m_ratio_max": 1.1314192471833153,
+      "inside": true,
+      "branch": 1,
+      "linear_consistency_P": 0.005774033135033914,
+      "wall_s": 19.10626952094026,
+      "build_s": 101.6636211569421,
+      "steps": 7954,
+      "rejected": 395,
+      "n_states": 1045
+    },
+    "S1_phase_test": {
+      "status": "complete",
+      "error": null,
+      "t_reached": 61.0,
+      "v_dc": [
+        0.8841698710809855,
+        1.1066037422176773
+      ],
+      "i_max": 0.6721670429873551,
+      "m_ratio_max": 1.1312729217069775,
+      "inside": true,
+      "branch": 1,
+      "linear_consistency_P": 0.00760498731854768,
+      "wall_s": 19.298946010996588,
+      "build_s": 99.93921783403493,
+      "steps": 7552,
+      "rejected": 1003,
+      "n_states": 1045
+    },
+    "S2_phase_build": {
+      "status": "complete",
+      "error": null,
+      "t_reached": 61.0,
+      "v_dc": [
+        0.8864192839601176,
+        1.1105828755476066
+      ],
+      "i_max": 0.6890497006771364,
+      "m_ratio_max": 1.1287921876423952,
+      "inside": true,
+      "branch": 1,
+      "linear_consistency_P": 0.005749842088710341,
+      "wall_s": 51.377751880907454,
+      "build_s": 102.74275261396542,
+      "steps": 16327,
+      "rejected": 3079,
+      "n_states": 1045
+    },
+    "S2_phase_test": {
+      "status": "complete",
+      "error": null,
+      "t_reached": 61.0,
+      "v_dc": [
+        0.8924536327850626,
+        1.106220493125438
+      ],
+      "i_max": 0.6725086661414078,
+      "m_ratio_max": 1.1211530583040565,
+      "inside": true,
+      "branch": 1,
+      "linear_consistency_P": 0.0068074903701058394,
+      "wall_s": 50.5968649139395,
+      "build_s": 102.40653608704451,
+      "steps": 17822,
+      "rejected": 3954,
+      "n_states": 1045
+    },
+    "S3_phase_build": {
+      "status": "complete",
+      "error": null,
+      "t_reached": 61.0,
+      "v_dc": [
+        0.8757428162897725,
+        1.0980372760175714
+      ],
+      "i_max": 0.6890298517075802,
+      "m_ratio_max": 1.142110713387403,
+      "inside": true,
+      "branch": 1,
+      "linear_consistency_P": 0.006403857031955413,
+      "wall_s": 18.755896494956687,
+      "build_s": 102.18866669607814,
+      "steps": 7675,
+      "rejected": 230,
+      "n_states": 1045
+    },
+    "S3_phase_test": {
+      "status": "complete",
+      "error": null,
+      "t_reached": 61.0,
+      "v_dc": [
+        0.8950953853725476,
+        1.0990808735804718
+      ],
+      "i_max": 0.6689795025381109,
+      "m_ratio_max": 1.117156216659903,
+      "inside": true,
+      "branch": 1,
+      "linear_consistency_P": 0.004297506599147934,
+      "wall_s": 21.038543786038645,
+      "build_s": 101.45797051303089,
+      "steps": 8327,
+      "rejected": 352,
+      "n_states": 1045
+    }
+  }
+}

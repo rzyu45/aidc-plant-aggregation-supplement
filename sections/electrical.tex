@@ -1,9 +1,11 @@
 \clearpage
 \section{Electrical Model and Power Accounting}
+\label{sec:electrical}
 \subsection{Conventions and state variables}
-A reproducible plant equivalent requires consistent device bases and connection signs.
-A chain contains an active front end (AFE), a voltage source inverter (VSI), a power supply unit (PSU) and a downstream DC--DC stage.
-Each supply chain uses its own three-phase rating $S_n$ as the power base.
+A reproducible plant model requires consistent device bases and connection signs.
+Each supply block consists of a unit transformer, an active front end (AFE), a voltage source inverter (VSI), a power supply unit (PSU) array and a server DC--DC stage.
+The unit transformer belongs to the algebraic network, and the four converter stages carry the differential states of the block.
+Each supply block uses its own three-phase rating $S_n$ as the power base.
 The network uses $S_b=200$~MVA and $\omega_b=2\pi60$~rad/s.
 Time is in seconds.
 Per-unit inductances and capacitances multiply derivatives divided by $\omega_b$.
@@ -17,14 +19,15 @@ Define
 \J=\begin{bmatrix}0&-1\\1&0\end{bmatrix}.
 \end{equation}
 Here $\bm v_g$ is the voltage at the low-voltage terminal of the unit transformer in network coordinates.
-The rectifier current $\bm i_a$ is positive into the supply chain.
+The rectifier current $\bm i_a$ is positive into the supply block.
 The VSI uses a separate synchronous frame with voltage $\bm v_v$ and converter current $\bm i_c$.
 
-One chain has 21 differential states.
+One supply block has 21 differential states.
 The AFE contributes $\theta$, $\epsilon$, $\bar v_q$, the two entries of $\bm i_a$, $\xi_a$ and the two entries of $\bm\gamma_a$.
 The VSI contributes the two entries of each of $\bm i_c$, $\bm v_v$, $\bm\xi_v$ and $\bm\gamma_v$.
-The remaining states are the shared DC-link voltage $v_d$, the PSU voltage $v_p$ and integrator $\xi_p$, and the server-side voltage $v_e$ and integrator $\xi_e$.
+The remaining states are the shared DC-link voltage $v_d$, the PSU output voltage $v_p$ and integrator $\xi_p$, and the server voltage $v_e$ and integrator $\xi_e$.
 The following vector equations count each two-entry vector as two states.
+The accompanying paper writes $v_{\rm dc}$, $v_{\rm psu}$ and $v_{\rm s}$ for $v_d$, $v_p$ and $v_e$.
 
 \subsection{AFE rectifier}
 The rectifier synchronizes to the unit-transformer voltage and regulates the shared DC link.
@@ -42,7 +45,8 @@ Its equations are
 A superscript $\star$ denotes a reference value.
 The constants $r_a$ and $\ell_a$ are the AFE filter resistance and inductance.
 Subscripts $da$ and $ca$ identify the DC-voltage and current controllers.
-The current-controller error and the coupling signs follow the source model \cite{zhao2026dynamic}; replacing them by another rectifier convention changes the model.
+The current-controller error and the coupling signs follow the source model \cite{zhao2026dynamic}.
+Another rectifier convention would change the model.
 
 \subsection{VSI and shared DC link}
 The VSI regulates its output voltage while drawing energy from the rectifier DC link.
@@ -59,7 +63,6 @@ Here $r_v$, $\ell_v$ and $c_v$ are the VSI filter parameters, $c_d$ is the DC-li
 Subscripts $vv$ and $cv$ denote its voltage and current controllers.
 The DC-link equation couples both converters through their current balance.
 The study represents online double-conversion operation.
-Battery discharge, bypass switching and protection actions are outside this model.
 
 \subsection{PSU array and server DC--DC stage}
 The positive-sequence PSU equivalent converts its AC input into a common DC supply.
@@ -79,44 +82,46 @@ i_e&=k_{p,ve}(v_e^\star-v_e)+k_{i,ve}\xi_e, &
 i_p&=\frac{v_e}{v_p}i_e.
 \end{align}
 The factor 3 follows the source model's three-phase power convention.
-The input $p_{\rm load}$ is the prescribed server demand on the chain base at $v_e=v_e^\star$.
+The input $p_{\rm load}$ is the prescribed server power on the block base at $v_e=v_e^\star$.
 The instantaneous power of the modeled load is $3g_e v_e^2$, so it equals $p_{\rm load}$ at the voltage reference.
 This distinction matters when interpreting internal voltage excursions.
-The node-power waveform specifies the terminal-demand command; it is not an additional current injection at the PCC.
+The server power of the hall sets this command.
+It is not an additional current injection at the PCC.
 
 \subsection{Hall and network connections}
-Each hall has one common feeder and four parallel supply branches.
-Each branch has its own 3~MVA unit transformer and independent converter output.
-The four branches share one quarter of the hall demand command and have identical parameters within a hall.
+Each hall has one common feeder and four parallel supply blocks.
+Each block has its own 3~MVA unit transformer and converters.
+The four blocks of hall $h$ have identical parameters, and each receives the command $p_{\rm load}=P_{{\rm IT},h}/(4S_n)$, where $P_{{\rm IT},h}$ is the server power of the hall defined in Section~\ref{sec:allocation}.
+The AC input power of a block is the active power that it draws at the low-voltage terminal of its unit transformer, and $P_{{\rm AC},h}$ denotes its sum over the four blocks of hall $h$.
 The cooling load connects to the hall bus after the common feeder and before the unit transformers.
 Auxiliary loads connect to the two medium-voltage buses.
-The buses and both main transformers remain distinct in every equivalent.
+The full model keeps both medium-voltage buses, both main transformers, the 12 feeders and the 48 unit transformers as separate elements.
+Section~\ref{sec:equivalent} describes how the single-block equivalent merges them.
 
-The current drawn from the network by chain $n$ is
+The current drawn from the network by supply block $n$ is
 \begin{equation}
 \bm i_{n,\rm sys}=\frac{S_n}{S_b}\R(\theta_n)^{\mathsf T}\bm i_{a,n}.
 \end{equation}
 With the network voltage phasors $V$, generator injections $I_G$ and explicit load withdrawals $I_L$, nodal balance is $YV=I_G-I_L$.
 A load represented as an admittance is included in $Y$ and is excluded from $I_L$.
-The algebraic network retains line and transformer impedances and feeder charging.
-It omits their electromagnetic differential states.
+The network is algebraic and retains the line and transformer impedances and the feeder charging.
 
-For the full plant, the operating-point cooling power is 17\% of the hall's AC IT input.
-Total auxiliary power is 3\% of the plant's AC IT input, divided equally between the medium-voltage sections.
+In the full model, the cooling power of a hall at the operating point is 17\% of the AC input power of its supply blocks.
+The total auxiliary power is 3\% of the AC input power of all supply blocks, divided equally between the medium-voltage sections.
 Cooling uses a constant-power representation and the auxiliaries use constant impedance.
-The static demand at bus~8 is
+With the AC input power $P_{n,\rm AC}$ of block $n$ at the operating point, the static demand at bus~8 is
 \begin{equation}
 P_{8,\rm residual}=100-1.20\sum_n P_{n,\rm AC}\quad\mathrm{MW}.
 \end{equation}
 The original 35~Mvar remains as a static impedance load.
 Collector losses are accounted for by the network.
-The PCC power is the sum of the powers entering both main transformers, so it includes these losses.
-The full plant's static loads are retained in its equivalents.
-They are not adjusted to cancel an equivalent's loss error.
+The PCC power is the sum of the powers entering the main transformers, so it includes these losses.
+The single-block equivalent keeps the static loads of the full model.
+They are not adjusted to cancel the loss error of the equivalent.
 
 The external system has a fourth-order synchronous machine with excitation and turbine-governor dynamics at bus~1, a droop grid-forming converter at bus~2 and a phase-locked-loop grid-following converter at bus~3.
 Their equations and parameter conventions follow the modified nine-bus reference in the supplement of \cite{zhao2026dynamic}.
 The implementation uses the source-current feed-forward sign $-1$ and the q-axis voltage convention for the grid-following converter.
 The accompanying data files give all grid parameter values and network branches.
-These grid devices contribute 37 states, so the plant model has $37+21K$ states after aggregation.
-The full plant has $K=48$ and 1045 states.
+These grid devices contribute 37 states, so a model with $N$ supply blocks has $37+21N$ states.
+The full model has $N=48$ blocks and 1045 states, and the single-block equivalent has $N=1$ and 58 states.

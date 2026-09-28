@@ -1,102 +1,74 @@
 {
-  "stage1_supplement": {
-    "style_scan": [],
-    "latex_diagnostics": [],
-    "pdf_sha256": "184e08e40470dc87e4756dba8be31345b1d0d1e344be3c134336d83ba5dd958a"
-  },
-  "source_check": {
-    "source_records": 24,
-    "mismatches": []
-  },
-  "baseline_results": {
-    "checked": 462,
-    "mismatches": []
-  },
-  "no_new_simulations": true,
-  "visual_inspection": {
-    "manuscript_pages": [
-      1,
-      2,
-      3,
-      4,
-      5
+  "revision": "2026-09-23, comparison of the full model with the single-block equivalent",
+  "title": "Task-Oriented Modeling of AI Data Center Plants for Resonance Analysis",
+  "page_count": 14,
+  "pdf_sha256": "71f966df195982d109eb1cfb31e713e2d60b1f38bf6317daafeb7fee97575a4f",
+  "latex_diagnostics": [],
+  "fonts_not_embedded": [],
+  "term_scan": {
+    "pattern": "cluster|group|aggregat|K *= *(2|4|6|8|10|12)|parameter feature|response feature|grouping|test input|supply chain|\\bchain",
+    "scope": [
+      "sections",
+      "supplement.tex",
+      "README.md",
+      "scripts"
     ],
-    "supplement_pages": [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10,
-      11,
-      12
-    ],
-    "log_pages": [
-      6,
-      132,
-      133,
-      134
+    "hits": [
+      "README.md, note for publication on the git history"
     ]
   },
-  "purpose_revision": {
-    "title": "Task-Oriented Modeling and Aggregation of AI Data Center Plants for Resonance Analysis",
-    "purpose": "task-to-PCC resonance response",
-    "methods": "small-signal modal/frequency-response analysis and task-driven time-domain validation",
-    "abstract_words": null,
-    "page_count": 12,
-    "unchanged_rendered_pages": [
+  "style_scan": {
+    "colons_in_prose": [],
+    "semicolons_in_prose": [],
+    "multi_sentence_lines": [],
+    "parentheses_in_prose": [],
+    "em_dashes": [],
+    "forbidden_words": []
+  },
+  "prose_values": {
+    "checked_by": "scripts/make_assets.py claims",
+    "count": 40,
+    "mismatches": []
+  },
+  "bundle": {
+    "files": [
+      "data/S1_internal.npz",
+      "data/S3_internal.npz",
+      "data/checks.json",
+      "data/design.json",
+      "data/full_model_checks.json",
+      "data/grid_parameters.json",
+      "data/inference_map.json",
+      "data/operating_points.json",
+      "data/p5_registration.json",
+      "data/p5_summary.json",
+      "data/scenarios.json"
+    ],
+    "source_records": 30,
+    "copied_files_identical_to_sources": true,
+    "extracted_blocks_identical_to_sources": true,
+    "figure_arrays_identical_to_sources": true
+  },
+  "visual_inspection": {
+    "pages_at_80_dpi": [
+      1,
       2,
       3,
       4,
       5,
       6,
-      7,
-      8,
-      9,
-      10,
-      11,
-      12
-    ],
-    "visually_checked_pages": [
-      1
-    ],
-    "latex_diagnostics": [],
-    "new_simulations": false,
-    "superseded_by": "coupling_review"
-  },
-  "coupling_review": {
-    "page_count": 13,
-    "abstract_words": null,
-    "unchanged_rendered_pages": [
-      2,
-      3,
-      4,
-      5,
-      6
-    ],
-    "visually_checked_pages": [
-      1,
       7,
       8,
       9,
       10,
       11,
       12,
-      13
+      13,
+      14
     ],
-    "latex_diagnostics": [],
-    "new_model_work": false,
-    "saved_response_audit": "report/stage1_coupling_audit/saved_response_check.json"
+    "figure_page_at_200_dpi": [
+      12
+    ]
   },
-  "sentence_source_format": {
-    "one_sentence_per_source_line": true,
-    "paragraph_breaks_preserved": true,
-    "math_and_table_rows_preserved": true,
-    "page_count": 13,
-    "all_pages_pixel_identical_at_dpi": 144
-  }
+  "no_new_simulations": true
 }
