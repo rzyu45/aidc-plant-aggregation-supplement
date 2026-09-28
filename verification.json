@@ -112,7 +112,7 @@
       "timing ratios against the full model and the exact 12-cluster equivalent",
       "Solverz citation and Rodas description"
     ],
-    "page_count": 14,
+    "page_count": 13,
     "latex_diagnostics": [],
     "visually_checked_pages": [
       1,
@@ -127,10 +127,13 @@
       10,
       11,
       12,
-      13,
-      14
+      13
     ],
     "new_simulations": false,
-    "pdf_sha256": "34ec5f6c31827c93cab1bd2d0e37f0e21f8626f4a022873829380b94a9539352"
+    "pdf_sha256": "63142d452a8132cabed5218a7b415007291d964ec60ca6d2894c7e348ffa01dd",
+    "removed": [
+      "Section S4.4 on evidence limits",
+      "sentences that only state what the results do not establish, in S2.3, S2.4, S3.3, S3.4, S3.5, S4.2 and S4.3"
+    ]
   }
 }
